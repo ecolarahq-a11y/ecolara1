@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { modules } from "@/data/modules";
+import { badges as allBadges } from "@/data/badges";
 import { useUserProgress } from "@/hooks/useUserProgress";
 import { getQuestionsForDifficulty, calculateQuizResult, type QuizResult } from "@/lib/quiz-engine";
 import Layout from "@/components/Layout";
