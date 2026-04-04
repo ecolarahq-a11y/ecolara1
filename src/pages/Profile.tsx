@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { useUserProgress } from "@/hooks/useUserProgress";
+import { useAuth } from "@/hooks/useAuth";
 import { modules } from "@/data/modules";
 import { badges } from "@/data/badges";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Star, Flame, BookOpen, Trophy, RotateCcw } from "lucide-react";
+import { Star, Flame, BookOpen, Trophy, RotateCcw, LogOut } from "lucide-react";
 
 export default function Profile() {
   const { progress, setName, resetProgress } = useUserProgress();
+  const { user, signOut } = useAuth();
   const [editing, setEditing] = useState(false);
   const [nameInput, setNameInput] = useState(progress.name);
 
@@ -40,6 +42,7 @@ export default function Profile() {
           ) : (
             <div className="mt-3">
               <h2 className="text-xl font-bold text-foreground">{progress.name}</h2>
+              <p className="text-xs text-muted-foreground">{user?.email}</p>
               <button onClick={() => setEditing(true)} className="text-xs text-primary mt-1">Edit name</button>
             </div>
           )}
@@ -98,16 +101,25 @@ export default function Profile() {
           </div>
         </div>
 
-        {/* Reset */}
-        <Button
-          variant="outline"
-          onClick={() => {
-            if (confirm("Reset all progress? This cannot be undone.")) resetProgress();
-          }}
-          className="w-full rounded-xl text-destructive border-destructive/30 hover:bg-destructive/10 gap-2"
-        >
-          <RotateCcw className="w-4 h-4" /> Reset Progress
-        </Button>
+        {/* Actions */}
+        <div className="space-y-3">
+          <Button
+            variant="outline"
+            onClick={() => {
+              if (confirm("Reset all progress? This cannot be undone.")) resetProgress();
+            }}
+            className="w-full rounded-xl text-destructive border-destructive/30 hover:bg-destructive/10 gap-2"
+          >
+            <RotateCcw className="w-4 h-4" /> Reset Progress
+          </Button>
+          <Button
+            variant="outline"
+            onClick={signOut}
+            className="w-full rounded-xl gap-2"
+          >
+            <LogOut className="w-4 h-4" /> Sign Out
+          </Button>
+        </div>
       </div>
     </Layout>
   );
