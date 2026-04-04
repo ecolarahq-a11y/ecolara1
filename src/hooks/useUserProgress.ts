@@ -1,4 +1,6 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
 
 export interface UserProgress {
   name: string;
@@ -35,29 +37,69 @@ function getLevel(points: number): number {
   return 1;
 }
 
-function loadProgress(): UserProgress {
-  try {
-    const saved = localStorage.getItem("ecolara-progress");
-    if (saved) return JSON.parse(saved);
-  } catch {}
-  return DEFAULT_PROGRESS;
-}
-
-function saveProgress(progress: UserProgress) {
-  localStorage.setItem("ecolara-progress", JSON.stringify(progress));
-}
-
 export function useUserProgress() {
-  const [progress, setProgress] = useState<UserProgress>(loadProgress);
+  const { user } = useAuth();
+  const [progress, setProgress] = useState<UserProgress>(DEFAULT_PROGRESS);
+  const [loaded, setLoaded] = useState(false);
+
+  // Load from Supabase on mount / user change
+  useEffect(() => {
+    if (!user) {
+      setProgress(DEFAULT_PROGRESS);
+      setLoaded(false);
+      return;
+    }
+
+    const load = async () => {
+      const [{ data: profile }, { data: prog }] = await Promise.all([
+        supabase.from("profiles").select("display_name").eq("user_id", user.id).single(),
+        supabase.from("user_progress").select("*").eq("user_id", user.id).single(),
+      ]);
+
+      if (prog) {
+        setProgress({
+          name: profile?.display_name || "Eco Learner",
+          totalPoints: prog.total_points,
+          completedModules: prog.completed_modules || [],
+          quizScores: (prog.quiz_scores as Record<string, number>) 
+            ? Object.fromEntries(Object.entries(prog.quiz_scores as Record<string, number>).map(([k, v]) => [Number(k), v]))
+            : {},
+          earnedBadges: prog.earned_badges || [],
+          currentDifficulty: (prog.current_difficulty as Record<string, string>)
+            ? Object.fromEntries(Object.entries(prog.current_difficulty as Record<string, string>).map(([k, v]) => [Number(k), v as "easy" | "medium" | "hard"]))
+            : {},
+          consecutivePasses: prog.consecutive_passes,
+          level: prog.level,
+        });
+      }
+      setLoaded(true);
+    };
+
+    load();
+  }, [user]);
+
+  // Persist to Supabase
+  const saveToDb = useCallback(async (next: UserProgress) => {
+    if (!user) return;
+    await supabase.from("user_progress").update({
+      total_points: next.totalPoints,
+      completed_modules: next.completedModules,
+      quiz_scores: next.quizScores as any,
+      earned_badges: next.earnedBadges,
+      current_difficulty: next.currentDifficulty as any,
+      consecutive_passes: next.consecutivePasses,
+      level: next.level,
+    }).eq("user_id", user.id);
+  }, [user]);
 
   const updateProgress = useCallback((updater: (prev: UserProgress) => UserProgress) => {
     setProgress(prev => {
       const next = updater(prev);
       next.level = getLevel(next.totalPoints);
-      saveProgress(next);
+      saveToDb(next);
       return next;
     });
-  }, []);
+  }, [saveToDb]);
 
   const addPoints = useCallback((points: number) => {
     updateProgress(p => ({ ...p, totalPoints: p.totalPoints + points }));
@@ -98,17 +140,32 @@ export function useUserProgress() {
     }));
   }, [updateProgress]);
 
-  const setName = useCallback((name: string) => {
+  const setName = useCallback(async (name: string) => {
     updateProgress(p => ({ ...p, name }));
-  }, [updateProgress]);
+    if (user) {
+      await supabase.from("profiles").update({ display_name: name }).eq("user_id", user.id);
+    }
+  }, [updateProgress, user]);
 
-  const resetProgress = useCallback(() => {
-    setProgress(DEFAULT_PROGRESS);
-    saveProgress(DEFAULT_PROGRESS);
-  }, []);
+  const resetProgress = useCallback(async () => {
+    const reset = { ...DEFAULT_PROGRESS, name: progress.name };
+    setProgress(reset);
+    if (user) {
+      await supabase.from("user_progress").update({
+        total_points: 0,
+        completed_modules: [],
+        quiz_scores: {},
+        earned_badges: [],
+        current_difficulty: {},
+        consecutive_passes: 0,
+        level: 1,
+      }).eq("user_id", user.id);
+    }
+  }, [user, progress.name]);
 
   return {
     progress,
+    loaded,
     addPoints,
     completeModule,
     recordQuizScore,
