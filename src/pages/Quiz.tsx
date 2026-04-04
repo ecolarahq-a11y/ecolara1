@@ -104,7 +104,7 @@ export default function Quiz() {
                 </p>
                 <div className="flex justify-center gap-2">
                   {result.newBadges.map(b => {
-                    const badge = require("@/data/badges").badges.find((bd: any) => bd.id === b);
+                    const badge = allBadges.find(bd => bd.id === b);
                     return badge ? (
                       <div key={b} className="bg-primary/10 rounded-lg px-3 py-2 text-center animate-pulse-glow">
                         <span className="text-2xl">{badge.icon}</span>
