@@ -1,13 +1,15 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Leaf, Mail, Lock, User } from "lucide-react";
+import { Mail, Lock, User, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import logo from "@/assets/ecolara-logo.jpg.asset.json";
 
 export default function Auth() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [searchParams] = useSearchParams();
+  const [isLogin, setIsLogin] = useState(searchParams.get("mode") !== "signup");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
@@ -25,7 +27,7 @@ export default function Auth() {
       if (error) {
         toast({ title: "Login failed", description: error.message, variant: "destructive" });
       } else {
-        navigate("/");
+        navigate("/home");
       }
     } else {
       if (!displayName.trim()) {
@@ -38,21 +40,22 @@ export default function Auth() {
         toast({ title: "Signup failed", description: error.message, variant: "destructive" });
       } else {
         toast({ title: "Account created!", description: "You can now start learning." });
-        navigate("/");
+        navigate("/home");
       }
     }
     setLoading(false);
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center px-4">
-      <div className="w-full max-w-sm space-y-8">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center px-4 py-8">
+      <div className="w-full max-w-sm space-y-6">
+        <Link to="/" className="inline-flex items-center gap-1 text-sm text-muted-foreground">
+          <ArrowLeft className="w-4 h-4" /> Back
+        </Link>
+
         <div className="text-center">
-          <div className="w-16 h-16 rounded-full eco-gradient mx-auto flex items-center justify-center mb-4">
-            <Leaf className="w-8 h-8 text-primary-foreground" />
-          </div>
-          <h1 className="text-2xl font-bold text-foreground">ECOLARA</h1>
-          <p className="text-sm text-muted-foreground mt-1">AI-Driven Climate Education</p>
+          <img src={logo.url} alt="EcoLara" className="w-24 h-24 mx-auto object-contain" />
+          <p className="text-xs text-muted-foreground mt-1">Gamified Climate Action Platform</p>
         </div>
 
         <div className="bg-card rounded-2xl p-6 border border-border shadow-sm">
