@@ -24,13 +24,27 @@ export const modules: Module[] = [
     description: "Understand the basics of climate change, greenhouse gases, and global warming.",
     icon: "🌍",
     source: "NASA, IPCC (2021)",
-    content: `Climate change refers to long-term shifts in temperatures and weather patterns across the globe. While natural factors like volcanic eruptions and solar cycles have influenced Earth's climate in the past, the current trend of rapid warming is primarily driven by human activities, particularly the burning of fossil fuels like coal, oil, and natural gas.
+    content: `**1. Defining Climate vs. Weather**
+Weather is what you experience day-to-day — a rainy afternoon, a cool morning, a heatwave. Climate is the long-term pattern of weather averaged over decades (typically 30 years or more) for a given region. When scientists talk about "climate change", they are describing measurable, statistically significant shifts in those long-term patterns: rising averages, more frequent extremes, and changing seasonal rhythms.
 
-When these fuels are burned, they release greenhouse gases — mainly carbon dioxide (CO₂), methane (CH₄), and nitrous oxide (N₂O) — into the atmosphere. These gases act like a blanket around the Earth, trapping heat from the sun and preventing it from escaping back into space. This is known as the greenhouse effect.
+**2. The Greenhouse Effect — In Detail**
+Sunlight reaches Earth as short-wavelength radiation. The surface absorbs it and re-emits energy as longer-wavelength infrared (heat) radiation. Certain gases in the atmosphere — carbon dioxide (CO₂), methane (CH₄), nitrous oxide (N₂O), water vapour, and fluorinated gases — have molecular structures that absorb this outgoing infrared and re-radiate it in all directions, including back to the surface. This natural process keeps Earth's average temperature around 15°C instead of a frozen -18°C. The problem today is that we have intensified it.
 
-Since the Industrial Revolution, the concentration of CO₂ in the atmosphere has increased by more than 50%. The global average temperature has risen by approximately 1.1°C above pre-industrial levels. While 1.1°C may sound small, even tiny changes in global average temperatures can trigger massive shifts in weather systems, sea levels, and ecosystems.
+**3. The Industrial Fingerprint**
+Ice cores from Antarctica preserve tiny bubbles of ancient air going back 800,000 years. They show atmospheric CO₂ oscillated between about 180 ppm (ice ages) and 280 ppm (warm periods). Since the Industrial Revolution (~1750), CO₂ has surged past 420 ppm — higher than at any point in human evolutionary history. Crucially, isotopic analysis (the ratio of carbon-12 to carbon-13) proves this extra CO₂ comes from fossil fuels, not volcanoes or oceans. This is called the "Suess effect" and it is the smoking gun of human causation.
 
-The effects are already visible: ice sheets in Greenland and Antarctica are melting, sea levels are rising, extreme weather events like hurricanes and droughts are becoming more frequent, and biodiversity is declining. Scientists warn that if warming exceeds 1.5°C, the consequences could become irreversible for many communities and ecosystems.`,
+**4. How 1.1°C Becomes Catastrophic**
+Global averages hide regional extremes. Arctic regions have warmed nearly 4× faster than the global mean. A 1.1°C rise in the average means many more days above 35°C, longer fire seasons, heavier rainfall events (warmer air holds ~7% more moisture per °C), stronger hurricanes, and shifted growing seasons. Climate is a non-linear system: small pushes can trigger disproportionate responses.
+
+**5. Observed Impacts Today**
+• Greenland is losing ~270 billion tonnes of ice per year.
+• Global sea level has risen ~21 cm since 1880 and is accelerating.
+• Coral reefs have suffered three global bleaching events since 2014.
+• Extreme heat events have become 5× more likely.
+• The ocean has absorbed ~30% of human CO₂, becoming 30% more acidic.
+
+**6. Tipping Points and the 1.5°C Limit**
+Scientists identify "tipping elements" — systems that could shift abruptly and irreversibly: collapse of the West Antarctic Ice Sheet, dieback of the Amazon rainforest, thawing of Arctic permafrost releasing methane, shutdown of the Atlantic Meridional Overturning Circulation. The 1.5°C target from the Paris Agreement is not arbitrary — it is the threshold beyond which the risk of crossing multiple tipping points rises sharply. Every fraction of a degree matters.`,
     questions: [
       { id: "m1-e1", question: "What is climate change?", options: ["A daily weather pattern", "Long-term shifts in temperatures and weather patterns", "A type of natural disaster", "Seasonal temperature changes"], correctIndex: 1, explanation: "Climate change refers to long-term shifts in temperatures and weather patterns across the globe.", difficulty: "easy" },
       { id: "m1-e2", question: "What is the main greenhouse gas released by burning fossil fuels?", options: ["Oxygen", "Nitrogen", "Carbon dioxide", "Hydrogen"], correctIndex: 2, explanation: "Burning fossil fuels primarily releases carbon dioxide (CO₂) into the atmosphere.", difficulty: "easy" },
@@ -55,17 +69,30 @@ The effects are already visible: ice sheets in Greenland and Antarctica are melt
     description: "Explore the human activities and natural factors driving climate change.",
     icon: "🏭",
     source: "IPCC (2021), UNESCO (2022)",
-    content: `The primary driver of modern climate change is the burning of fossil fuels for energy, transportation, and industry. Coal-fired power plants, gasoline-powered vehicles, and industrial processes release billions of tonnes of CO₂ each year. In 2022 alone, global CO₂ emissions from fossil fuels reached approximately 36.8 billion tonnes.
+    content: `**1. The Energy System — Root of Modern Emissions**
+About 73% of global greenhouse gas emissions come from energy use: electricity generation, heating, transport, and industry. Coal is the most carbon-intensive fuel (~820 g CO₂/kWh), followed by oil (~720 g/kWh) and natural gas (~490 g/kWh). Renewables like solar and wind emit 10–50× less over their lifecycle. In 2022, fossil fuel CO₂ emissions hit ~36.8 Gt — a record. China, the US, India, the EU, and Russia together account for over 60% of annual emissions, though per-capita figures tell a very different story (the average American emits ~14 t, the average Nigerian ~0.7 t).
 
-Deforestation is the second largest contributor. Trees absorb CO₂ during photosynthesis, so when forests are cleared — often for agriculture, logging, or urban expansion — that stored carbon is released. Tropical deforestation accounts for about 10% of global greenhouse gas emissions.
+**2. Transport — A Stubborn Sector**
+Transport contributes ~16% of global CO₂. Road vehicles dominate, but aviation (~2.5%) and shipping (~3%) are growing fast and are particularly hard to decarbonise because batteries are too heavy for long-haul flight or ocean freight. Synthetic fuels, hydrogen, and ammonia are being explored as alternatives.
 
-Agriculture contributes significantly through livestock farming (cattle produce methane during digestion), rice paddies (which emit methane from waterlogged soils), and the use of nitrogen-based fertilizers (which release nitrous oxide). Together, agriculture accounts for roughly 10-12% of global emissions.
+**3. Land Use, Deforestation, and Agriculture**
+Land-use change contributes ~11% of emissions, primarily from clearing tropical forests for cattle, soy, palm oil, and timber. The Amazon, Congo, and Southeast Asian rainforests are the three great carbon sinks — and all three are now under severe pressure. Agriculture itself adds another ~12%:
+• Enteric fermentation: cows and other ruminants release methane through digestion.
+• Manure management and synthetic fertilisers produce nitrous oxide (~265× more potent than CO₂).
+• Flooded rice paddies generate methane from anaerobic microbes.
+• Land clearance and soil disturbance release stored carbon.
 
-Industrial processes such as cement production, steel manufacturing, and chemical processing also release substantial greenhouse gases. Cement production alone is responsible for about 8% of global CO₂ emissions.
+**4. Industry and Materials**
+Cement (~8% of global CO₂), steel (~7%), chemicals, and aluminium are emissions-intensive because their chemistry inherently releases CO₂ (cement clinker production) or requires very high heat. "Hard-to-abate" sectors need entirely new processes — green hydrogen-based steel, electrified cement kilns, and carbon capture.
 
-Waste management, particularly landfills where organic waste decomposes without oxygen, produces methane. Poor waste management in developing countries amplifies this problem.
+**5. Waste and the Hidden Methane Problem**
+Open landfills, especially in fast-urbanising countries, release vast amounts of methane as organic waste decomposes anaerobically. Methane is ~80× more powerful than CO₂ over 20 years, so improved waste management is one of the highest-leverage climate actions available.
 
-While natural factors like volcanic eruptions and solar variability do influence climate, scientific evidence overwhelmingly shows that human activities are responsible for more than 95% of the warming observed since the mid-20th century.`,
+**6. Natural Drivers — Why They're Not the Culprit**
+Volcanoes, solar variability, and orbital cycles have driven past climate shifts. But measurements are clear: volcanic CO₂ is ~100× smaller than human emissions annually, solar output has actually slightly declined since 1980 while temperatures rose, and Milankovitch cycles operate on tens of thousands of years. The IPCC's Sixth Assessment concluded with 95%+ confidence that humans are the dominant cause of warming since 1950.
+
+**7. Inequality of Responsibility**
+The richest 10% of humanity is responsible for ~50% of consumption-based emissions. The poorest 50% account for only ~12%. This asymmetry is at the heart of "climate justice" debates.`,
     questions: [
       { id: "m2-e1", question: "What is the primary driver of modern climate change?", options: ["Volcanic eruptions", "Solar cycles", "Burning fossil fuels", "Deforestation only"], correctIndex: 2, explanation: "Burning fossil fuels for energy, transportation, and industry is the primary driver.", difficulty: "easy" },
       { id: "m2-e2", question: "How does deforestation contribute to climate change?", options: ["Trees produce CO₂", "Removing trees releases stored carbon", "Forests block sunlight", "Deforestation cools the earth"], correctIndex: 1, explanation: "When forests are cleared, the carbon stored in trees is released into the atmosphere.", difficulty: "easy" },
