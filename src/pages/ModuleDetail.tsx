@@ -38,9 +38,19 @@ export default function ModuleDetail() {
 
         <div className="bg-card rounded-2xl p-5 border border-border mb-6">
           <div className="prose prose-sm max-w-none text-foreground">
-            {mod.content.split("\n\n").map((para, i) => (
-              <p key={i} className="text-sm leading-relaxed text-foreground/90 mb-3">{para}</p>
-            ))}
+            {mod.content.split("\n\n").map((para, i) => {
+              const html = para
+                .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+                .replace(/\*\*(.+?)\*\*/g, '<strong class="text-foreground font-semibold">$1</strong>')
+                .replace(/\n/g, "<br/>");
+              return (
+                <p
+                  key={i}
+                  className="text-sm leading-relaxed text-foreground/90 mb-3"
+                  dangerouslySetInnerHTML={{ __html: html }}
+                />
+              );
+            })}
           </div>
           <p className="text-[10px] text-muted-foreground mt-4 pt-3 border-t border-border">Source: {mod.source}</p>
         </div>

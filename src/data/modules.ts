@@ -24,13 +24,27 @@ export const modules: Module[] = [
     description: "Understand the basics of climate change, greenhouse gases, and global warming.",
     icon: "🌍",
     source: "NASA, IPCC (2021)",
-    content: `Climate change refers to long-term shifts in temperatures and weather patterns across the globe. While natural factors like volcanic eruptions and solar cycles have influenced Earth's climate in the past, the current trend of rapid warming is primarily driven by human activities, particularly the burning of fossil fuels like coal, oil, and natural gas.
+    content: `**1. Defining Climate vs. Weather**
+Weather is what you experience day-to-day — a rainy afternoon, a cool morning, a heatwave. Climate is the long-term pattern of weather averaged over decades (typically 30 years or more) for a given region. When scientists talk about "climate change", they are describing measurable, statistically significant shifts in those long-term patterns: rising averages, more frequent extremes, and changing seasonal rhythms.
 
-When these fuels are burned, they release greenhouse gases — mainly carbon dioxide (CO₂), methane (CH₄), and nitrous oxide (N₂O) — into the atmosphere. These gases act like a blanket around the Earth, trapping heat from the sun and preventing it from escaping back into space. This is known as the greenhouse effect.
+**2. The Greenhouse Effect — In Detail**
+Sunlight reaches Earth as short-wavelength radiation. The surface absorbs it and re-emits energy as longer-wavelength infrared (heat) radiation. Certain gases in the atmosphere — carbon dioxide (CO₂), methane (CH₄), nitrous oxide (N₂O), water vapour, and fluorinated gases — have molecular structures that absorb this outgoing infrared and re-radiate it in all directions, including back to the surface. This natural process keeps Earth's average temperature around 15°C instead of a frozen -18°C. The problem today is that we have intensified it.
 
-Since the Industrial Revolution, the concentration of CO₂ in the atmosphere has increased by more than 50%. The global average temperature has risen by approximately 1.1°C above pre-industrial levels. While 1.1°C may sound small, even tiny changes in global average temperatures can trigger massive shifts in weather systems, sea levels, and ecosystems.
+**3. The Industrial Fingerprint**
+Ice cores from Antarctica preserve tiny bubbles of ancient air going back 800,000 years. They show atmospheric CO₂ oscillated between about 180 ppm (ice ages) and 280 ppm (warm periods). Since the Industrial Revolution (~1750), CO₂ has surged past 420 ppm — higher than at any point in human evolutionary history. Crucially, isotopic analysis (the ratio of carbon-12 to carbon-13) proves this extra CO₂ comes from fossil fuels, not volcanoes or oceans. This is called the "Suess effect" and it is the smoking gun of human causation.
 
-The effects are already visible: ice sheets in Greenland and Antarctica are melting, sea levels are rising, extreme weather events like hurricanes and droughts are becoming more frequent, and biodiversity is declining. Scientists warn that if warming exceeds 1.5°C, the consequences could become irreversible for many communities and ecosystems.`,
+**4. How 1.1°C Becomes Catastrophic**
+Global averages hide regional extremes. Arctic regions have warmed nearly 4× faster than the global mean. A 1.1°C rise in the average means many more days above 35°C, longer fire seasons, heavier rainfall events (warmer air holds ~7% more moisture per °C), stronger hurricanes, and shifted growing seasons. Climate is a non-linear system: small pushes can trigger disproportionate responses.
+
+**5. Observed Impacts Today**
+• Greenland is losing ~270 billion tonnes of ice per year.
+• Global sea level has risen ~21 cm since 1880 and is accelerating.
+• Coral reefs have suffered three global bleaching events since 2014.
+• Extreme heat events have become 5× more likely.
+• The ocean has absorbed ~30% of human CO₂, becoming 30% more acidic.
+
+**6. Tipping Points and the 1.5°C Limit**
+Scientists identify "tipping elements" — systems that could shift abruptly and irreversibly: collapse of the West Antarctic Ice Sheet, dieback of the Amazon rainforest, thawing of Arctic permafrost releasing methane, shutdown of the Atlantic Meridional Overturning Circulation. The 1.5°C target from the Paris Agreement is not arbitrary — it is the threshold beyond which the risk of crossing multiple tipping points rises sharply. Every fraction of a degree matters.`,
     questions: [
       { id: "m1-e1", question: "What is climate change?", options: ["A daily weather pattern", "Long-term shifts in temperatures and weather patterns", "A type of natural disaster", "Seasonal temperature changes"], correctIndex: 1, explanation: "Climate change refers to long-term shifts in temperatures and weather patterns across the globe.", difficulty: "easy" },
       { id: "m1-e2", question: "What is the main greenhouse gas released by burning fossil fuels?", options: ["Oxygen", "Nitrogen", "Carbon dioxide", "Hydrogen"], correctIndex: 2, explanation: "Burning fossil fuels primarily releases carbon dioxide (CO₂) into the atmosphere.", difficulty: "easy" },
@@ -55,17 +69,30 @@ The effects are already visible: ice sheets in Greenland and Antarctica are melt
     description: "Explore the human activities and natural factors driving climate change.",
     icon: "🏭",
     source: "IPCC (2021), UNESCO (2022)",
-    content: `The primary driver of modern climate change is the burning of fossil fuels for energy, transportation, and industry. Coal-fired power plants, gasoline-powered vehicles, and industrial processes release billions of tonnes of CO₂ each year. In 2022 alone, global CO₂ emissions from fossil fuels reached approximately 36.8 billion tonnes.
+    content: `**1. The Energy System — Root of Modern Emissions**
+About 73% of global greenhouse gas emissions come from energy use: electricity generation, heating, transport, and industry. Coal is the most carbon-intensive fuel (~820 g CO₂/kWh), followed by oil (~720 g/kWh) and natural gas (~490 g/kWh). Renewables like solar and wind emit 10–50× less over their lifecycle. In 2022, fossil fuel CO₂ emissions hit ~36.8 Gt — a record. China, the US, India, the EU, and Russia together account for over 60% of annual emissions, though per-capita figures tell a very different story (the average American emits ~14 t, the average Nigerian ~0.7 t).
 
-Deforestation is the second largest contributor. Trees absorb CO₂ during photosynthesis, so when forests are cleared — often for agriculture, logging, or urban expansion — that stored carbon is released. Tropical deforestation accounts for about 10% of global greenhouse gas emissions.
+**2. Transport — A Stubborn Sector**
+Transport contributes ~16% of global CO₂. Road vehicles dominate, but aviation (~2.5%) and shipping (~3%) are growing fast and are particularly hard to decarbonise because batteries are too heavy for long-haul flight or ocean freight. Synthetic fuels, hydrogen, and ammonia are being explored as alternatives.
 
-Agriculture contributes significantly through livestock farming (cattle produce methane during digestion), rice paddies (which emit methane from waterlogged soils), and the use of nitrogen-based fertilizers (which release nitrous oxide). Together, agriculture accounts for roughly 10-12% of global emissions.
+**3. Land Use, Deforestation, and Agriculture**
+Land-use change contributes ~11% of emissions, primarily from clearing tropical forests for cattle, soy, palm oil, and timber. The Amazon, Congo, and Southeast Asian rainforests are the three great carbon sinks — and all three are now under severe pressure. Agriculture itself adds another ~12%:
+• Enteric fermentation: cows and other ruminants release methane through digestion.
+• Manure management and synthetic fertilisers produce nitrous oxide (~265× more potent than CO₂).
+• Flooded rice paddies generate methane from anaerobic microbes.
+• Land clearance and soil disturbance release stored carbon.
 
-Industrial processes such as cement production, steel manufacturing, and chemical processing also release substantial greenhouse gases. Cement production alone is responsible for about 8% of global CO₂ emissions.
+**4. Industry and Materials**
+Cement (~8% of global CO₂), steel (~7%), chemicals, and aluminium are emissions-intensive because their chemistry inherently releases CO₂ (cement clinker production) or requires very high heat. "Hard-to-abate" sectors need entirely new processes — green hydrogen-based steel, electrified cement kilns, and carbon capture.
 
-Waste management, particularly landfills where organic waste decomposes without oxygen, produces methane. Poor waste management in developing countries amplifies this problem.
+**5. Waste and the Hidden Methane Problem**
+Open landfills, especially in fast-urbanising countries, release vast amounts of methane as organic waste decomposes anaerobically. Methane is ~80× more powerful than CO₂ over 20 years, so improved waste management is one of the highest-leverage climate actions available.
 
-While natural factors like volcanic eruptions and solar variability do influence climate, scientific evidence overwhelmingly shows that human activities are responsible for more than 95% of the warming observed since the mid-20th century.`,
+**6. Natural Drivers — Why They're Not the Culprit**
+Volcanoes, solar variability, and orbital cycles have driven past climate shifts. But measurements are clear: volcanic CO₂ is ~100× smaller than human emissions annually, solar output has actually slightly declined since 1980 while temperatures rose, and Milankovitch cycles operate on tens of thousands of years. The IPCC's Sixth Assessment concluded with 95%+ confidence that humans are the dominant cause of warming since 1950.
+
+**7. Inequality of Responsibility**
+The richest 10% of humanity is responsible for ~50% of consumption-based emissions. The poorest 50% account for only ~12%. This asymmetry is at the heart of "climate justice" debates.`,
     questions: [
       { id: "m2-e1", question: "What is the primary driver of modern climate change?", options: ["Volcanic eruptions", "Solar cycles", "Burning fossil fuels", "Deforestation only"], correctIndex: 2, explanation: "Burning fossil fuels for energy, transportation, and industry is the primary driver.", difficulty: "easy" },
       { id: "m2-e2", question: "How does deforestation contribute to climate change?", options: ["Trees produce CO₂", "Removing trees releases stored carbon", "Forests block sunlight", "Deforestation cools the earth"], correctIndex: 1, explanation: "When forests are cleared, the carbon stored in trees is released into the atmosphere.", difficulty: "easy" },
@@ -90,17 +117,31 @@ While natural factors like volcanic eruptions and solar variability do influence
     description: "Discover how climate change specifically impacts Nigerian communities and ecosystems.",
     icon: "🇳🇬",
     source: "Okafor et al. (2022), NEST",
-    content: `Nigeria is one of the most climate-vulnerable countries in Africa. The effects of climate change are already reshaping the country's environment, economy, and daily life.
+    content: `**1. Why Nigeria is Highly Exposed**
+Nigeria sits across multiple climate zones — Sahel in the north, Guinea savanna in the middle, tropical rainforest and mangrove coast in the south. Each is vulnerable in a different way. The country also has weak adaptive infrastructure, a fast-growing population (projected to reach 400 million by 2050), and an economy concentrated in climate-sensitive sectors: agriculture, oil, and informal urban services. The IPCC ranks West Africa among the world's most vulnerable regions.
 
-In the North, desertification is advancing at an alarming rate. The Sahara Desert is expanding southward by approximately 600 metres per year, swallowing farmland and displacing communities. States like Borno, Yobe, and Sokoto have lost significant agricultural land, pushing millions of people into poverty and food insecurity.
+**2. Desertification and Land Degradation in the North**
+The Sahara is advancing southward at roughly 0.6 km per year. In states like Borno, Yobe, Sokoto, Jigawa, Katsina, and Kebbi, Lake Chad — once Africa's fourth-largest lake — has shrunk by ~90% since the 1960s due to drought, over-extraction, and rising temperatures. Roughly 30 million people who depended on it for fishing, farming, and grazing have lost their livelihoods. This collapse is widely cited as a driver of the Boko Haram insurgency, which recruits heavily from displaced and economically devastated communities.
 
-In the South, seasonal flooding has become increasingly severe. The 2022 floods were among the worst in Nigeria's history, displacing over 1.4 million people, destroying farmland, and causing hundreds of deaths. Rising sea levels threaten coastal cities like Lagos, where land subsidence compounds the problem.
+**3. Flooding and the Coastal South**
+The 2022 floods affected 34 of 36 states, killed more than 600 people, displaced 1.4 million, and destroyed over 440,000 hectares of farmland. Lagos — home to ~21 million people and worth ~30% of national GDP — is sinking at ~2 mm/year while seas rise at 3 mm/year. Without major adaptation (sea walls, drainage upgrades, mangrove restoration), large parts of Lagos Island, Victoria Island, and Lekki could be regularly inundated by 2050. Niger Delta communities face saltwater intrusion that poisons drinking water and farmland.
 
-Temperature increases have expanded the range of disease-carrying mosquitoes, leading to higher rates of malaria in areas that were previously too cool for the disease. Heat stress is also affecting agricultural workers and urban populations, particularly in northern cities.
+**4. Agriculture and Food Security**
+Agriculture employs ~70% of rural Nigerians and contributes ~24% of GDP. Climate change is hitting yields hard:
+• Erratic rainfall is shortening growing seasons in the Sahel.
+• Heat stress reduces maize yields by ~10% per 1°C above 30°C.
+• Cocoa belts in Ondo, Cross River, and Ogun are shifting upslope as conditions become too warm.
+• Pests and crop diseases (fall armyworm, cassava mosaic virus) are expanding their ranges.
+Food prices have risen sharply, and Nigeria — once self-sufficient — now imports billions of dollars in food annually.
 
-Nigeria's agricultural sector, which employs about 70% of the rural population, is highly climate-sensitive. Changes in rainfall patterns disrupt planting seasons, reduce crop yields, and threaten food security. Cash crops like cocoa and palm oil are also affected by temperature changes.
+**5. Public Health Impacts**
+Warmer temperatures expand the range of malaria-carrying *Anopheles* mosquitoes into highland areas of Plateau and Taraba. Cholera outbreaks follow floods. Meningitis belts in the north shift with changing rainfall. Air pollution from generators, biomass cooking, and gas flaring in the Niger Delta compounds respiratory disease. Heat stress is increasingly affecting outdoor workers — farmers, market traders, motorcycle taxi (okada) riders.
 
-Conflict over shrinking resources has intensified. The farmer-herder crisis in the Middle Belt is partly driven by climate change, as pastoralists move southward seeking grazing land lost to desertification, leading to violent clashes with farming communities.`,
+**6. Climate, Conflict, and Migration**
+Climate stress acts as a *threat multiplier*. The southward push of herders into the Middle Belt has fuelled deadly farmer-herder clashes in Benue, Plateau, Nasarawa, and Taraba — now one of Nigeria's deadliest internal conflicts. Coastal erosion has displaced communities in Bayelsa and Akwa Ibom. Internal climate migration is straining cities like Lagos, Abuja, and Port Harcourt.
+
+**7. The Energy Paradox**
+Nigeria is Africa's largest oil producer, yet ~85 million Nigerians lack reliable electricity. Decentralised solar — mini-grids, solar home systems — is rapidly expanding and offers a path to leapfrog dirty grids. The federal Energy Transition Plan targets net-zero by 2060 with massive solar, gas-as-transition-fuel, and reforestation components.`,
     questions: [
       { id: "m3-e1", question: "What is happening to the Sahara Desert in relation to Nigeria?", options: ["It's shrinking", "It's expanding southward", "It's staying the same", "It's moving eastward"], correctIndex: 1, explanation: "The Sahara Desert is expanding southward by approximately 600 metres per year.", difficulty: "easy" },
       { id: "m3-e2", question: "How many people were displaced by Nigeria's 2022 floods?", options: ["10,000", "100,000", "Over 1.4 million", "500,000"], correctIndex: 2, explanation: "The 2022 floods displaced over 1.4 million people in Nigeria.", difficulty: "easy" },
@@ -125,19 +166,47 @@ Conflict over shrinking resources has intensified. The farmer-herder crisis in t
     description: "Learn practical actions everyone can take to combat climate change.",
     icon: "🌱",
     source: "UNESCO (2022), NASA",
-    content: `While climate change is a global problem that requires systemic solutions, individual actions matter and collectively add up to meaningful impact.
+    content: `**1. Why Individual Action Matters (and Where It Doesn't)**
+Roughly 70% of global emissions trace back to just 100 fossil-fuel companies, so personal choices alone will not solve the crisis. But individuals shape demand, politics, and culture. The most impactful "personal" actions are usually the ones that scale: voting, advocacy, professional career choices, and influencing peers — not just turning off lights.
 
-Energy Conservation: Reducing energy consumption at home is one of the most impactful steps. Switching to energy-efficient LED bulbs, turning off appliances when not in use, and using natural ventilation instead of air conditioning where possible can significantly reduce your carbon footprint. In Nigeria, where electricity generation relies heavily on fossil fuels and generators, every kilowatt saved matters.
+**2. Home Energy — Highest Leverage Per Naira**
+• Switch all incandescent bulbs to LEDs (use up to 90% less power).
+• Unplug "vampire" devices (TVs, chargers, decoders) — they draw 5–10% of home electricity even when "off".
+• Set air conditioners to 24–25°C; every 1°C lower roughly increases consumption by ~7%.
+• Insulate roofs and use light-coloured paint to reduce cooling load.
+• If you can invest, rooftop solar pays back in 4–7 years in most Nigerian cities and frees you from generator fuel.
 
-Transportation Choices: Walking, cycling, using public transport, or carpooling instead of driving alone reduces emissions. For longer distances, choosing trains over flights where possible makes a big difference. If you must drive, maintaining your vehicle properly improves fuel efficiency.
+**3. Transport**
+Per passenger-kilometre, walking and cycling emit zero; a danfo or BRT bus emits ~30–80 g CO₂; a private car emits ~150–250 g; a short-haul flight emits ~250 g. Practical steps:
+• Combine errands into one trip.
+• Use BRT and shared transport for daily commutes.
+• Keep tyres correctly inflated (improves fuel economy ~3%).
+• When buying a vehicle, prioritise fuel efficiency or hybrid/electric where charging is feasible.
 
-Waste Reduction: Reducing, reusing, and recycling waste helps lower methane emissions from landfills. Composting organic waste, avoiding single-use plastics, and choosing products with minimal packaging all contribute. In Nigerian markets, bringing your own bags and containers can reduce plastic waste significantly.
+**4. Food and Water**
+• Beef and lamb are 10–50× more emissions-intensive than legumes, grains, and vegetables. Swapping a few meals per week to plant-based meals (beans, moi-moi, vegetable stews) is one of the highest-impact dietary changes.
+• Reduce food waste — globally ~30% of food is wasted; in Nigeria post-harvest losses are particularly high. Plan meals, store properly, compost scraps.
+• Eat seasonally and locally where possible to cut transport emissions.
 
-Dietary Choices: Eating more plant-based foods and less red meat can substantially reduce your carbon footprint. Livestock farming is one of the largest sources of agricultural emissions. Even reducing meat consumption by a few meals per week makes a difference.
+**5. Waste and Consumption**
+• Refuse single-use plastics — sachet water, plastic cutlery, straws. Carry a reusable bottle and bag.
+• Repair before replacing — clothes, electronics, phones.
+• Buy second-hand (Nigeria's "okrika" markets are already great at this).
+• Sort waste at source; support local recycling co-ops.
 
-Tree Planting and Green Spaces: Planting trees and maintaining green spaces helps absorb CO₂ from the atmosphere. Community tree-planting initiatives and urban greening projects are growing across Nigeria.
+**6. Trees, Land, and Nature**
+Mature trees absorb ~20–25 kg of CO₂ per year. Community greening — school gardens, urban tree planting, mangrove restoration in the Niger Delta — also cools cities, reduces flood risk, and improves air quality. Avoid burning bush or charcoal where alternatives exist.
 
-Advocacy and Education: Perhaps the most powerful individual action is spreading awareness. Talking to friends and family about climate change, supporting environmental policies, and holding leaders accountable amplifies impact far beyond personal actions.`,
+**7. The Multiplier Actions — Where Real Power Lives**
+These are usually skipped in "10 tips" articles but matter most:
+• **Talk about climate.** Studies show peer conversations shift behaviour more than data sheets.
+• **Vote and engage politically** — for candidates with credible climate plans.
+• **Move money.** Choose banks and pensions that don't finance fossil expansion.
+• **Career choice.** Working on clean energy, sustainable agriculture, climate policy, or green tech can be your biggest lifetime contribution.
+• **Hold corporations accountable.** Call out greenwashing; demand transparency.
+
+**8. Watch Out For Greenwashing**
+Companies routinely market products as "eco-friendly", "carbon-neutral", or "natural" without substance. Look for verifiable certifications, full-lifecycle disclosures, and independent audits — not just green colour schemes and leaf logos.`,
     questions: [
       { id: "m4-e1", question: "What type of light bulb is most energy-efficient?", options: ["Incandescent", "Halogen", "LED", "Fluorescent"], correctIndex: 2, explanation: "LED bulbs are the most energy-efficient lighting option.", difficulty: "easy" },
       { id: "m4-e2", question: "What does 'reduce, reuse, recycle' help prevent?", options: ["Deforestation", "Methane emissions from landfills", "Solar radiation", "Ocean currents"], correctIndex: 1, explanation: "Reducing, reusing, and recycling waste helps lower methane emissions from landfills.", difficulty: "easy" },
@@ -162,17 +231,43 @@ Advocacy and Education: Perhaps the most powerful individual action is spreading
     description: "Understand how climate action connects to the UN Sustainable Development Goals.",
     icon: "🎯",
     source: "UNESCO (2022), UN SDG Reports",
-    content: `The United Nations Sustainable Development Goals (SDGs), adopted in 2015, are a set of 17 interconnected goals designed to address the world's most pressing challenges by 2030. Climate action is SDG 13, but climate change impacts virtually every other goal.
+    content: `**1. The 2030 Agenda**
+In 2015, all 193 UN member states adopted the *2030 Agenda for Sustainable Development*: 17 Sustainable Development Goals (SDGs) and 169 targets covering poverty, hunger, health, education, gender equality, water, energy, jobs, inequality, cities, consumption, oceans, land, peace, and partnerships. The SDGs are *indivisible* — progress on one depends on progress on others.
 
-SDG 13: Climate Action calls for urgent action to combat climate change and its impacts. Key targets include strengthening resilience and adaptive capacity, integrating climate measures into national policies, and improving education and awareness on climate change mitigation and adaptation.
+**2. SDG 13: Climate Action — The Targets**
+SDG 13 has five specific targets:
+13.1 Strengthen resilience and adaptive capacity to climate hazards and natural disasters.
+13.2 Integrate climate measures into national policies, strategies, and planning.
+13.3 Improve education, awareness, and human/institutional capacity on mitigation and early warning.
+13.a Implement the UNFCCC commitment to mobilise US$100 billion/year to support developing countries.
+13.b Promote effective climate planning in least-developed and small island states, with a focus on women, youth, and marginalised communities.
 
-The connection between climate change and other SDGs is profound. SDG 1 (No Poverty): Climate disasters disproportionately affect the poorest communities, trapping them in cycles of poverty. SDG 2 (Zero Hunger): Changing weather patterns threaten food production and security. SDG 3 (Good Health): Climate change increases disease spread, air pollution, and heat-related health issues. SDG 6 (Clean Water): Droughts and flooding affect water availability and quality. SDG 14 (Life Below Water) and SDG 15 (Life on Land): Ocean acidification, coral bleaching, deforestation, and biodiversity loss are direct climate consequences.
+**3. The Web of Connections**
+• **SDG 1 (No Poverty):** A single climate disaster can push families into multi-generational poverty.
+• **SDG 2 (Zero Hunger):** Yields of staple crops (maize, wheat, rice) fall ~5–10% per 1°C of warming.
+• **SDG 3 (Good Health):** WHO estimates climate change will cause ~250,000 extra deaths/year between 2030–2050 from heat, malnutrition, malaria, and diarrhoea.
+• **SDG 5 (Gender Equality):** Women in low-income communities — who often manage water, food, and energy — face disproportionate climate burdens.
+• **SDG 6 (Clean Water):** Droughts and floods threaten freshwater supplies.
+• **SDG 7 (Affordable & Clean Energy):** The energy transition is the spine of climate mitigation.
+• **SDG 11 (Sustainable Cities):** ~70% of emissions and most climate risk concentrates in urban areas.
+• **SDG 14 & 15 (Life Below Water / On Land):** Ocean acidification, coral bleaching, and ecosystem collapse are direct climate consequences.
 
-The Paris Agreement, adopted in 2015, represents the global commitment to limiting warming to well below 2°C above pre-industrial levels, with efforts to limit it to 1.5°C. Countries submit Nationally Determined Contributions (NDCs) outlining their climate plans.
+**4. The Paris Agreement — How It Works**
+Adopted at COP21 in 2015 and entered into force in 2016, the Paris Agreement is legally binding in process (every country must submit and update a plan) but voluntary in ambition. Each country files a **Nationally Determined Contribution (NDC)** — its self-set emissions and adaptation targets — and updates it every 5 years in a "ratchet mechanism" intended to increase ambition over time. A global stocktake every 5 years assesses collective progress.
 
-Nigeria's NDC commits to a 20% unconditional reduction in greenhouse gas emissions by 2030, with up to 47% conditional on international support. Nigeria has also committed to achieving net-zero emissions by 2060.
+The agreement's goal: limit warming to *well below 2°C*, pursuing efforts toward *1.5°C*. Current NDCs are projected to deliver only ~2.5–2.9°C of warming — a serious ambition gap.
 
-Youth engagement is critical. Young people are not just future leaders — they are current stakeholders whose lives will be most affected by climate decisions made today. Youth-led movements, climate education, and digital platforms like this app are essential tools for driving awareness and action.`,
+**5. Nigeria's Climate Commitments**
+• **NDC (2021 update):** 20% unconditional emissions reduction by 2030, 47% conditional on international support, relative to business-as-usual.
+• **Net-zero by 2060** (announced at COP26).
+• **Climate Change Act (2021):** establishes a National Council on Climate Change and carbon budgets.
+• **Energy Transition Plan (2022):** identifies US$1.9 trillion of investment needed by 2060; emphasises gas as a transition fuel, massive solar deployment, clean cooking, electric mobility, and reforestation.
+
+**6. Climate Finance and Justice**
+Wealthy nations promised US$100 billion/year by 2020 to help developing countries adapt and decarbonise — a target only barely met in 2022, and largely as loans rather than grants. The COP27 "Loss and Damage" fund (2022) is a historic acknowledgement that countries least responsible for emissions deserve compensation for unavoidable losses. The COP28 outcome (2023) for the first time called for "transitioning away from fossil fuels" — symbolic but not binding.
+
+**7. Why Youth Voice Matters**
+Decisions made now will define the climate that young people inherit. Youth-led movements — Fridays For Future, the Africa Youth Climate Hub, Nigeria's Eco-Warriors and Climate Action Africa — are reshaping politics. Climate education, civic engagement, and platforms like ECOLARA are critical for building informed, mobilised generations who will hold leaders accountable through 2030, 2050, and beyond.`,
     questions: [
       { id: "m5-e1", question: "What number SDG is Climate Action?", options: ["SDG 7", "SDG 10", "SDG 13", "SDG 17"], correctIndex: 2, explanation: "Climate Action is Sustainable Development Goal 13.", difficulty: "easy" },
       { id: "m5-e2", question: "When were the SDGs adopted?", options: ["2010", "2015", "2020", "2000"], correctIndex: 1, explanation: "The SDGs were adopted by the United Nations in 2015.", difficulty: "easy" },
