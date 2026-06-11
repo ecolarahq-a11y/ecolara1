@@ -11,6 +11,7 @@ import Quiz from "./pages/Quiz";
 import Badges from "./pages/Badges";
 import Profile from "./pages/Profile";
 import Auth from "./pages/Auth";
+import Splash from "./pages/Splash";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
