@@ -12,6 +12,8 @@ import Badges from "./pages/Badges";
 import Profile from "./pages/Profile";
 import Auth from "./pages/Auth";
 import Splash from "./pages/Splash";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -47,6 +49,8 @@ function AppRoutes() {
     <Routes>
       <Route path="/" element={user ? <Navigate to="/home" replace /> : <Splash />} />
       <Route path="/auth" element={user ? <Navigate to="/home" replace /> : <Auth />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/home" element={<ProtectedRoute><Index /></ProtectedRoute>} />
       <Route path="/modules" element={<ProtectedRoute><Modules /></ProtectedRoute>} />
       <Route path="/module/:id" element={<ProtectedRoute><ModuleDetail /></ProtectedRoute>} />
