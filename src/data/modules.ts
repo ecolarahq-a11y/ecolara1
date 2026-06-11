@@ -117,17 +117,31 @@ The richest 10% of humanity is responsible for ~50% of consumption-based emissio
     description: "Discover how climate change specifically impacts Nigerian communities and ecosystems.",
     icon: "🇳🇬",
     source: "Okafor et al. (2022), NEST",
-    content: `Nigeria is one of the most climate-vulnerable countries in Africa. The effects of climate change are already reshaping the country's environment, economy, and daily life.
+    content: `**1. Why Nigeria is Highly Exposed**
+Nigeria sits across multiple climate zones — Sahel in the north, Guinea savanna in the middle, tropical rainforest and mangrove coast in the south. Each is vulnerable in a different way. The country also has weak adaptive infrastructure, a fast-growing population (projected to reach 400 million by 2050), and an economy concentrated in climate-sensitive sectors: agriculture, oil, and informal urban services. The IPCC ranks West Africa among the world's most vulnerable regions.
 
-In the North, desertification is advancing at an alarming rate. The Sahara Desert is expanding southward by approximately 600 metres per year, swallowing farmland and displacing communities. States like Borno, Yobe, and Sokoto have lost significant agricultural land, pushing millions of people into poverty and food insecurity.
+**2. Desertification and Land Degradation in the North**
+The Sahara is advancing southward at roughly 0.6 km per year. In states like Borno, Yobe, Sokoto, Jigawa, Katsina, and Kebbi, Lake Chad — once Africa's fourth-largest lake — has shrunk by ~90% since the 1960s due to drought, over-extraction, and rising temperatures. Roughly 30 million people who depended on it for fishing, farming, and grazing have lost their livelihoods. This collapse is widely cited as a driver of the Boko Haram insurgency, which recruits heavily from displaced and economically devastated communities.
 
-In the South, seasonal flooding has become increasingly severe. The 2022 floods were among the worst in Nigeria's history, displacing over 1.4 million people, destroying farmland, and causing hundreds of deaths. Rising sea levels threaten coastal cities like Lagos, where land subsidence compounds the problem.
+**3. Flooding and the Coastal South**
+The 2022 floods affected 34 of 36 states, killed more than 600 people, displaced 1.4 million, and destroyed over 440,000 hectares of farmland. Lagos — home to ~21 million people and worth ~30% of national GDP — is sinking at ~2 mm/year while seas rise at 3 mm/year. Without major adaptation (sea walls, drainage upgrades, mangrove restoration), large parts of Lagos Island, Victoria Island, and Lekki could be regularly inundated by 2050. Niger Delta communities face saltwater intrusion that poisons drinking water and farmland.
 
-Temperature increases have expanded the range of disease-carrying mosquitoes, leading to higher rates of malaria in areas that were previously too cool for the disease. Heat stress is also affecting agricultural workers and urban populations, particularly in northern cities.
+**4. Agriculture and Food Security**
+Agriculture employs ~70% of rural Nigerians and contributes ~24% of GDP. Climate change is hitting yields hard:
+• Erratic rainfall is shortening growing seasons in the Sahel.
+• Heat stress reduces maize yields by ~10% per 1°C above 30°C.
+• Cocoa belts in Ondo, Cross River, and Ogun are shifting upslope as conditions become too warm.
+• Pests and crop diseases (fall armyworm, cassava mosaic virus) are expanding their ranges.
+Food prices have risen sharply, and Nigeria — once self-sufficient — now imports billions of dollars in food annually.
 
-Nigeria's agricultural sector, which employs about 70% of the rural population, is highly climate-sensitive. Changes in rainfall patterns disrupt planting seasons, reduce crop yields, and threaten food security. Cash crops like cocoa and palm oil are also affected by temperature changes.
+**5. Public Health Impacts**
+Warmer temperatures expand the range of malaria-carrying *Anopheles* mosquitoes into highland areas of Plateau and Taraba. Cholera outbreaks follow floods. Meningitis belts in the north shift with changing rainfall. Air pollution from generators, biomass cooking, and gas flaring in the Niger Delta compounds respiratory disease. Heat stress is increasingly affecting outdoor workers — farmers, market traders, motorcycle taxi (okada) riders.
 
-Conflict over shrinking resources has intensified. The farmer-herder crisis in the Middle Belt is partly driven by climate change, as pastoralists move southward seeking grazing land lost to desertification, leading to violent clashes with farming communities.`,
+**6. Climate, Conflict, and Migration**
+Climate stress acts as a *threat multiplier*. The southward push of herders into the Middle Belt has fuelled deadly farmer-herder clashes in Benue, Plateau, Nasarawa, and Taraba — now one of Nigeria's deadliest internal conflicts. Coastal erosion has displaced communities in Bayelsa and Akwa Ibom. Internal climate migration is straining cities like Lagos, Abuja, and Port Harcourt.
+
+**7. The Energy Paradox**
+Nigeria is Africa's largest oil producer, yet ~85 million Nigerians lack reliable electricity. Decentralised solar — mini-grids, solar home systems — is rapidly expanding and offers a path to leapfrog dirty grids. The federal Energy Transition Plan targets net-zero by 2060 with massive solar, gas-as-transition-fuel, and reforestation components.`,
     questions: [
       { id: "m3-e1", question: "What is happening to the Sahara Desert in relation to Nigeria?", options: ["It's shrinking", "It's expanding southward", "It's staying the same", "It's moving eastward"], correctIndex: 1, explanation: "The Sahara Desert is expanding southward by approximately 600 metres per year.", difficulty: "easy" },
       { id: "m3-e2", question: "How many people were displaced by Nigeria's 2022 floods?", options: ["10,000", "100,000", "Over 1.4 million", "500,000"], correctIndex: 2, explanation: "The 2022 floods displaced over 1.4 million people in Nigeria.", difficulty: "easy" },
