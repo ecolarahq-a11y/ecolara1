@@ -45,8 +45,9 @@ function AppRoutes() {
 
   return (
     <Routes>
-      <Route path="/auth" element={user ? <Navigate to="/" replace /> : <Auth />} />
-      <Route path="/" element={<ProtectedRoute><Index /></ProtectedRoute>} />
+      <Route path="/" element={user ? <Navigate to="/home" replace /> : <Splash />} />
+      <Route path="/auth" element={user ? <Navigate to="/home" replace /> : <Auth />} />
+      <Route path="/home" element={<ProtectedRoute><Index /></ProtectedRoute>} />
       <Route path="/modules" element={<ProtectedRoute><Modules /></ProtectedRoute>} />
       <Route path="/module/:id" element={<ProtectedRoute><ModuleDetail /></ProtectedRoute>} />
       <Route path="/quiz/:id" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
