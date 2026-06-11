@@ -166,19 +166,47 @@ Nigeria is Africa's largest oil producer, yet ~85 million Nigerians lack reliabl
     description: "Learn practical actions everyone can take to combat climate change.",
     icon: "🌱",
     source: "UNESCO (2022), NASA",
-    content: `While climate change is a global problem that requires systemic solutions, individual actions matter and collectively add up to meaningful impact.
+    content: `**1. Why Individual Action Matters (and Where It Doesn't)**
+Roughly 70% of global emissions trace back to just 100 fossil-fuel companies, so personal choices alone will not solve the crisis. But individuals shape demand, politics, and culture. The most impactful "personal" actions are usually the ones that scale: voting, advocacy, professional career choices, and influencing peers — not just turning off lights.
 
-Energy Conservation: Reducing energy consumption at home is one of the most impactful steps. Switching to energy-efficient LED bulbs, turning off appliances when not in use, and using natural ventilation instead of air conditioning where possible can significantly reduce your carbon footprint. In Nigeria, where electricity generation relies heavily on fossil fuels and generators, every kilowatt saved matters.
+**2. Home Energy — Highest Leverage Per Naira**
+• Switch all incandescent bulbs to LEDs (use up to 90% less power).
+• Unplug "vampire" devices (TVs, chargers, decoders) — they draw 5–10% of home electricity even when "off".
+• Set air conditioners to 24–25°C; every 1°C lower roughly increases consumption by ~7%.
+• Insulate roofs and use light-coloured paint to reduce cooling load.
+• If you can invest, rooftop solar pays back in 4–7 years in most Nigerian cities and frees you from generator fuel.
 
-Transportation Choices: Walking, cycling, using public transport, or carpooling instead of driving alone reduces emissions. For longer distances, choosing trains over flights where possible makes a big difference. If you must drive, maintaining your vehicle properly improves fuel efficiency.
+**3. Transport**
+Per passenger-kilometre, walking and cycling emit zero; a danfo or BRT bus emits ~30–80 g CO₂; a private car emits ~150–250 g; a short-haul flight emits ~250 g. Practical steps:
+• Combine errands into one trip.
+• Use BRT and shared transport for daily commutes.
+• Keep tyres correctly inflated (improves fuel economy ~3%).
+• When buying a vehicle, prioritise fuel efficiency or hybrid/electric where charging is feasible.
 
-Waste Reduction: Reducing, reusing, and recycling waste helps lower methane emissions from landfills. Composting organic waste, avoiding single-use plastics, and choosing products with minimal packaging all contribute. In Nigerian markets, bringing your own bags and containers can reduce plastic waste significantly.
+**4. Food and Water**
+• Beef and lamb are 10–50× more emissions-intensive than legumes, grains, and vegetables. Swapping a few meals per week to plant-based meals (beans, moi-moi, vegetable stews) is one of the highest-impact dietary changes.
+• Reduce food waste — globally ~30% of food is wasted; in Nigeria post-harvest losses are particularly high. Plan meals, store properly, compost scraps.
+• Eat seasonally and locally where possible to cut transport emissions.
 
-Dietary Choices: Eating more plant-based foods and less red meat can substantially reduce your carbon footprint. Livestock farming is one of the largest sources of agricultural emissions. Even reducing meat consumption by a few meals per week makes a difference.
+**5. Waste and Consumption**
+• Refuse single-use plastics — sachet water, plastic cutlery, straws. Carry a reusable bottle and bag.
+• Repair before replacing — clothes, electronics, phones.
+• Buy second-hand (Nigeria's "okrika" markets are already great at this).
+• Sort waste at source; support local recycling co-ops.
 
-Tree Planting and Green Spaces: Planting trees and maintaining green spaces helps absorb CO₂ from the atmosphere. Community tree-planting initiatives and urban greening projects are growing across Nigeria.
+**6. Trees, Land, and Nature**
+Mature trees absorb ~20–25 kg of CO₂ per year. Community greening — school gardens, urban tree planting, mangrove restoration in the Niger Delta — also cools cities, reduces flood risk, and improves air quality. Avoid burning bush or charcoal where alternatives exist.
 
-Advocacy and Education: Perhaps the most powerful individual action is spreading awareness. Talking to friends and family about climate change, supporting environmental policies, and holding leaders accountable amplifies impact far beyond personal actions.`,
+**7. The Multiplier Actions — Where Real Power Lives**
+These are usually skipped in "10 tips" articles but matter most:
+• **Talk about climate.** Studies show peer conversations shift behaviour more than data sheets.
+• **Vote and engage politically** — for candidates with credible climate plans.
+• **Move money.** Choose banks and pensions that don't finance fossil expansion.
+• **Career choice.** Working on clean energy, sustainable agriculture, climate policy, or green tech can be your biggest lifetime contribution.
+• **Hold corporations accountable.** Call out greenwashing; demand transparency.
+
+**8. Watch Out For Greenwashing**
+Companies routinely market products as "eco-friendly", "carbon-neutral", or "natural" without substance. Look for verifiable certifications, full-lifecycle disclosures, and independent audits — not just green colour schemes and leaf logos.`,
     questions: [
       { id: "m4-e1", question: "What type of light bulb is most energy-efficient?", options: ["Incandescent", "Halogen", "LED", "Fluorescent"], correctIndex: 2, explanation: "LED bulbs are the most energy-efficient lighting option.", difficulty: "easy" },
       { id: "m4-e2", question: "What does 'reduce, reuse, recycle' help prevent?", options: ["Deforestation", "Methane emissions from landfills", "Solar radiation", "Ocean currents"], correctIndex: 1, explanation: "Reducing, reusing, and recycling waste helps lower methane emissions from landfills.", difficulty: "easy" },
@@ -203,17 +231,43 @@ Advocacy and Education: Perhaps the most powerful individual action is spreading
     description: "Understand how climate action connects to the UN Sustainable Development Goals.",
     icon: "🎯",
     source: "UNESCO (2022), UN SDG Reports",
-    content: `The United Nations Sustainable Development Goals (SDGs), adopted in 2015, are a set of 17 interconnected goals designed to address the world's most pressing challenges by 2030. Climate action is SDG 13, but climate change impacts virtually every other goal.
+    content: `**1. The 2030 Agenda**
+In 2015, all 193 UN member states adopted the *2030 Agenda for Sustainable Development*: 17 Sustainable Development Goals (SDGs) and 169 targets covering poverty, hunger, health, education, gender equality, water, energy, jobs, inequality, cities, consumption, oceans, land, peace, and partnerships. The SDGs are *indivisible* — progress on one depends on progress on others.
 
-SDG 13: Climate Action calls for urgent action to combat climate change and its impacts. Key targets include strengthening resilience and adaptive capacity, integrating climate measures into national policies, and improving education and awareness on climate change mitigation and adaptation.
+**2. SDG 13: Climate Action — The Targets**
+SDG 13 has five specific targets:
+13.1 Strengthen resilience and adaptive capacity to climate hazards and natural disasters.
+13.2 Integrate climate measures into national policies, strategies, and planning.
+13.3 Improve education, awareness, and human/institutional capacity on mitigation and early warning.
+13.a Implement the UNFCCC commitment to mobilise US$100 billion/year to support developing countries.
+13.b Promote effective climate planning in least-developed and small island states, with a focus on women, youth, and marginalised communities.
 
-The connection between climate change and other SDGs is profound. SDG 1 (No Poverty): Climate disasters disproportionately affect the poorest communities, trapping them in cycles of poverty. SDG 2 (Zero Hunger): Changing weather patterns threaten food production and security. SDG 3 (Good Health): Climate change increases disease spread, air pollution, and heat-related health issues. SDG 6 (Clean Water): Droughts and flooding affect water availability and quality. SDG 14 (Life Below Water) and SDG 15 (Life on Land): Ocean acidification, coral bleaching, deforestation, and biodiversity loss are direct climate consequences.
+**3. The Web of Connections**
+• **SDG 1 (No Poverty):** A single climate disaster can push families into multi-generational poverty.
+• **SDG 2 (Zero Hunger):** Yields of staple crops (maize, wheat, rice) fall ~5–10% per 1°C of warming.
+• **SDG 3 (Good Health):** WHO estimates climate change will cause ~250,000 extra deaths/year between 2030–2050 from heat, malnutrition, malaria, and diarrhoea.
+• **SDG 5 (Gender Equality):** Women in low-income communities — who often manage water, food, and energy — face disproportionate climate burdens.
+• **SDG 6 (Clean Water):** Droughts and floods threaten freshwater supplies.
+• **SDG 7 (Affordable & Clean Energy):** The energy transition is the spine of climate mitigation.
+• **SDG 11 (Sustainable Cities):** ~70% of emissions and most climate risk concentrates in urban areas.
+• **SDG 14 & 15 (Life Below Water / On Land):** Ocean acidification, coral bleaching, and ecosystem collapse are direct climate consequences.
 
-The Paris Agreement, adopted in 2015, represents the global commitment to limiting warming to well below 2°C above pre-industrial levels, with efforts to limit it to 1.5°C. Countries submit Nationally Determined Contributions (NDCs) outlining their climate plans.
+**4. The Paris Agreement — How It Works**
+Adopted at COP21 in 2015 and entered into force in 2016, the Paris Agreement is legally binding in process (every country must submit and update a plan) but voluntary in ambition. Each country files a **Nationally Determined Contribution (NDC)** — its self-set emissions and adaptation targets — and updates it every 5 years in a "ratchet mechanism" intended to increase ambition over time. A global stocktake every 5 years assesses collective progress.
 
-Nigeria's NDC commits to a 20% unconditional reduction in greenhouse gas emissions by 2030, with up to 47% conditional on international support. Nigeria has also committed to achieving net-zero emissions by 2060.
+The agreement's goal: limit warming to *well below 2°C*, pursuing efforts toward *1.5°C*. Current NDCs are projected to deliver only ~2.5–2.9°C of warming — a serious ambition gap.
 
-Youth engagement is critical. Young people are not just future leaders — they are current stakeholders whose lives will be most affected by climate decisions made today. Youth-led movements, climate education, and digital platforms like this app are essential tools for driving awareness and action.`,
+**5. Nigeria's Climate Commitments**
+• **NDC (2021 update):** 20% unconditional emissions reduction by 2030, 47% conditional on international support, relative to business-as-usual.
+• **Net-zero by 2060** (announced at COP26).
+• **Climate Change Act (2021):** establishes a National Council on Climate Change and carbon budgets.
+• **Energy Transition Plan (2022):** identifies US$1.9 trillion of investment needed by 2060; emphasises gas as a transition fuel, massive solar deployment, clean cooking, electric mobility, and reforestation.
+
+**6. Climate Finance and Justice**
+Wealthy nations promised US$100 billion/year by 2020 to help developing countries adapt and decarbonise — a target only barely met in 2022, and largely as loans rather than grants. The COP27 "Loss and Damage" fund (2022) is a historic acknowledgement that countries least responsible for emissions deserve compensation for unavoidable losses. The COP28 outcome (2023) for the first time called for "transitioning away from fossil fuels" — symbolic but not binding.
+
+**7. Why Youth Voice Matters**
+Decisions made now will define the climate that young people inherit. Youth-led movements — Fridays For Future, the Africa Youth Climate Hub, Nigeria's Eco-Warriors and Climate Action Africa — are reshaping politics. Climate education, civic engagement, and platforms like ECOLARA are critical for building informed, mobilised generations who will hold leaders accountable through 2030, 2050, and beyond.`,
     questions: [
       { id: "m5-e1", question: "What number SDG is Climate Action?", options: ["SDG 7", "SDG 10", "SDG 13", "SDG 17"], correctIndex: 2, explanation: "Climate Action is Sustainable Development Goal 13.", difficulty: "easy" },
       { id: "m5-e2", question: "When were the SDGs adopted?", options: ["2010", "2015", "2020", "2000"], correctIndex: 1, explanation: "The SDGs were adopted by the United Nations in 2015.", difficulty: "easy" },
