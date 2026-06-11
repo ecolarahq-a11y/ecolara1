@@ -121,7 +121,7 @@ export default function Quiz() {
             <Button onClick={() => navigate(`/module/${mod.id}`)} variant="outline" className="flex-1 rounded-xl">
               Review Module
             </Button>
-            <Button onClick={() => navigate("/")} className="flex-1 rounded-xl bg-primary text-primary-foreground">
+            <Button onClick={() => navigate("/home")} className="flex-1 rounded-xl bg-primary text-primary-foreground">
               Home
             </Button>
           </div>
