@@ -43,31 +43,20 @@ export default function Quiz() {
     if (idx === question.correctIndex) setCorrectCount(c => c + 1);
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (currentQ < questions.length - 1) {
       setCurrentQ(c => c + 1);
       setSelectedAnswer(null);
       setAnswered(false);
     } else {
-      const finalCorrect = correctCount + (selectedAnswer === question.correctIndex ? 0 : 0);
-      // correctCount already updated in handleAnswer
-      const quizResult = calculateQuizResult(
-        correctCount,
-        questions.length,
-        mod.id,
-        progress.completedModules,
-        progress.quizScores,
-        progress.consecutivePasses,
-        progress.earnedBadges
-      );
-      setResult(quizResult);
-      addPoints(quizResult.pointsAwarded);
-      recordQuizScore(mod.id, quizResult.percentage);
-      setDifficulty(mod.id, quizResult.nextDifficulty);
-      updateConsecutive(quizResult.percentage >= 50);
-      if (quizResult.newBadges.length > 0) addBadges(quizResult.newBadges);
+      if (submitting) return;
+      setSubmitting(true);
+      const res = await submitQuiz(mod.id, correctCount, questions.length);
+      setSubmitting(false);
+      if (res) setResult(res);
     }
   };
+
 
   if (result) {
     return (
