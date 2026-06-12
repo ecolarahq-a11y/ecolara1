@@ -88,7 +88,11 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      reset_user_progress: { Args: never; Returns: undefined }
+      submit_quiz_result: {
+        Args: { p_correct: number; p_module_id: number; p_total: number }
+        Returns: Json
+      }
     }
     Enums: {
       [_ in never]: never
