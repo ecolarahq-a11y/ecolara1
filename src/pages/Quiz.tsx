@@ -2,8 +2,8 @@ import { useState, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { modules } from "@/data/modules";
 import { badges as allBadges } from "@/data/badges";
-import { useUserProgress } from "@/hooks/useUserProgress";
-import { getQuestionsForDifficulty, calculateQuizResult, type QuizResult } from "@/lib/quiz-engine";
+import { useUserProgress, type SubmitQuizResponse } from "@/hooks/useUserProgress";
+import { getQuestionsForDifficulty } from "@/lib/quiz-engine";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -12,7 +12,7 @@ import { ArrowLeft, CheckCircle2, XCircle, ArrowRight, Trophy } from "lucide-rea
 export default function Quiz() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { progress, addPoints, recordQuizScore, addBadges, setDifficulty, updateConsecutive } = useUserProgress();
+  const { progress, submitQuiz } = useUserProgress();
   const mod = modules.find(m => m.id === Number(id));
 
   const difficulty = progress.currentDifficulty[mod?.id || 1] || "medium";
@@ -25,7 +25,8 @@ export default function Quiz() {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [answered, setAnswered] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
-  const [result, setResult] = useState<QuizResult | null>(null);
+  const [result, setResult] = useState<SubmitQuizResponse | null>(null);
+  const [submitting, setSubmitting] = useState(false);
 
   if (!mod || questions.length === 0) {
     return <Layout><div className="p-8 text-center text-muted-foreground">Module not found</div></Layout>;
@@ -42,31 +43,20 @@ export default function Quiz() {
     if (idx === question.correctIndex) setCorrectCount(c => c + 1);
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (currentQ < questions.length - 1) {
       setCurrentQ(c => c + 1);
       setSelectedAnswer(null);
       setAnswered(false);
     } else {
-      const finalCorrect = correctCount + (selectedAnswer === question.correctIndex ? 0 : 0);
-      // correctCount already updated in handleAnswer
-      const quizResult = calculateQuizResult(
-        correctCount,
-        questions.length,
-        mod.id,
-        progress.completedModules,
-        progress.quizScores,
-        progress.consecutivePasses,
-        progress.earnedBadges
-      );
-      setResult(quizResult);
-      addPoints(quizResult.pointsAwarded);
-      recordQuizScore(mod.id, quizResult.percentage);
-      setDifficulty(mod.id, quizResult.nextDifficulty);
-      updateConsecutive(quizResult.percentage >= 50);
-      if (quizResult.newBadges.length > 0) addBadges(quizResult.newBadges);
+      if (submitting) return;
+      setSubmitting(true);
+      const res = await submitQuiz(mod.id, correctCount, questions.length);
+      setSubmitting(false);
+      if (res) setResult(res);
     }
   };
+
 
   if (result) {
     return (

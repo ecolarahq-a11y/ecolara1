@@ -34,6 +34,7 @@ export default function Profile() {
               <Input
                 value={nameInput}
                 onChange={e => setNameInput(e.target.value)}
+                maxLength={50}
                 className="rounded-lg"
                 onKeyDown={e => e.key === "Enter" && handleSaveName()}
               />
