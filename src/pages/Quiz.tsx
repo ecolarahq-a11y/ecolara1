@@ -25,7 +25,8 @@ export default function Quiz() {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [answered, setAnswered] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
-  const [result, setResult] = useState<QuizResult | null>(null);
+  const [result, setResult] = useState<SubmitQuizResponse | null>(null);
+  const [submitting, setSubmitting] = useState(false);
 
   if (!mod || questions.length === 0) {
     return <Layout><div className="p-8 text-center text-muted-foreground">Module not found</div></Layout>;
