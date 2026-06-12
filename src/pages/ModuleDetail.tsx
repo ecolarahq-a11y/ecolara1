@@ -8,7 +8,7 @@ import { ArrowLeft, Play } from "lucide-react";
 export default function ModuleDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { progress, completeModule } = useUserProgress();
+  const { progress } = useUserProgress();
   const mod = modules.find(m => m.id === Number(id));
 
   if (!mod) return <Layout><div className="p-8 text-center text-muted-foreground">Module not found</div></Layout>;
@@ -17,7 +17,7 @@ export default function ModuleDetail() {
   const difficulty = progress.currentDifficulty[mod.id] || "medium";
 
   const handleStartQuiz = () => {
-    completeModule(mod.id);
+    // Completion is recorded server-side once the quiz is submitted
     navigate(`/quiz/${mod.id}`);
   };
 
