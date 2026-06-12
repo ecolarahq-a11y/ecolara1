@@ -2,8 +2,8 @@ import { useState, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { modules } from "@/data/modules";
 import { badges as allBadges } from "@/data/badges";
-import { useUserProgress } from "@/hooks/useUserProgress";
-import { getQuestionsForDifficulty, calculateQuizResult, type QuizResult } from "@/lib/quiz-engine";
+import { useUserProgress, type SubmitQuizResponse } from "@/hooks/useUserProgress";
+import { getQuestionsForDifficulty } from "@/lib/quiz-engine";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -12,7 +12,7 @@ import { ArrowLeft, CheckCircle2, XCircle, ArrowRight, Trophy } from "lucide-rea
 export default function Quiz() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { progress, addPoints, recordQuizScore, addBadges, setDifficulty, updateConsecutive } = useUserProgress();
+  const { progress, submitQuiz } = useUserProgress();
   const mod = modules.find(m => m.id === Number(id));
 
   const difficulty = progress.currentDifficulty[mod?.id || 1] || "medium";
