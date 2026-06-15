@@ -34,6 +34,8 @@ const DEFAULT_PROGRESS: UserProgress = {
   currentDifficulty: {},
   consecutivePasses: 0,
   level: 1,
+  streak: 0,
+  last_active_date: null,
 };
 
 function mapRow(prog: any, name: string): UserProgress {
@@ -55,6 +57,8 @@ function mapRow(prog: any, name: string): UserProgress {
       : {},
     consecutivePasses: prog.consecutive_passes,
     level: prog.level,
+    streak: prog.streak_count ?? 0,
+    last_active_date: prog.last_active_date ?? null,
   };
 }
 
