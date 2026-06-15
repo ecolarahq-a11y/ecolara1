@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useUserProgress } from "@/hooks/useUserProgress";
 import { modules } from "@/data/modules";
 import { badges } from "@/data/badges";
@@ -7,7 +8,8 @@ import { BookOpen, Flame, Trophy, Star, ChevronRight } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 
 export default function Index() {
-  const { progress } = useUserProgress();
+  const { progress, callStreak } = useUserProgress();
+  useEffect(() => { callStreak(); }, [callStreak]);
   const completionPct = Math.round((progress.completedModules.length / modules.length) * 100);
   const nextModule = modules.find(m => !progress.completedModules.includes(m.id)) || modules[0];
 
