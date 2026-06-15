@@ -49,8 +49,10 @@ export type Database = {
           current_difficulty: Json
           earned_badges: string[]
           id: string
+          last_active_date: string | null
           level: number
           quiz_scores: Json
+          streak_count: number
           total_points: number
           updated_at: string
           user_id: string
@@ -62,8 +64,10 @@ export type Database = {
           current_difficulty?: Json
           earned_badges?: string[]
           id?: string
+          last_active_date?: string | null
           level?: number
           quiz_scores?: Json
+          streak_count?: number
           total_points?: number
           updated_at?: string
           user_id: string
@@ -75,8 +79,10 @@ export type Database = {
           current_difficulty?: Json
           earned_badges?: string[]
           id?: string
+          last_active_date?: string | null
           level?: number
           quiz_scores?: Json
+          streak_count?: number
           total_points?: number
           updated_at?: string
           user_id?: string
@@ -93,6 +99,7 @@ export type Database = {
         Args: { p_correct: number; p_module_id: number; p_total: number }
         Returns: Json
       }
+      update_daily_streak: { Args: never; Returns: number }
     }
     Enums: {
       [_ in never]: never
