@@ -11,6 +11,8 @@ export interface UserProgress {
   currentDifficulty: Record<number, "easy" | "medium" | "hard">;
   consecutivePasses: number;
   level: number;
+  streak: number;
+  last_active_date: string | null;
 }
 
 export interface SubmitQuizResponse {
