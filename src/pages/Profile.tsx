@@ -66,10 +66,10 @@ export default function Profile() {
             </div>
           </div>
           <div className="bg-card rounded-xl p-4 border border-border flex items-center gap-3">
-            <BookOpen className="w-8 h-8 text-primary" />
+            <Flame className="w-8 h-8 text-orange-500" />
             <div>
-              <p className="text-lg font-bold text-foreground">{progress.completedModules.length}/{modules.length}</p>
-              <p className="text-[10px] text-muted-foreground">Modules Done</p>
+              <p className="text-lg font-bold text-foreground">{progress.streak} days</p>
+              <p className="text-[10px] text-muted-foreground">Current streak</p>
             </div>
           </div>
           <div className="bg-card rounded-xl p-4 border border-border flex items-center gap-3">

@@ -11,6 +11,8 @@ export interface UserProgress {
   currentDifficulty: Record<number, "easy" | "medium" | "hard">;
   consecutivePasses: number;
   level: number;
+  streak: number;
+  last_active_date: string | null;
 }
 
 export interface SubmitQuizResponse {
@@ -32,6 +34,8 @@ const DEFAULT_PROGRESS: UserProgress = {
   currentDifficulty: {},
   consecutivePasses: 0,
   level: 1,
+  streak: 0,
+  last_active_date: null,
 };
 
 function mapRow(prog: any, name: string): UserProgress {
@@ -53,6 +57,8 @@ function mapRow(prog: any, name: string): UserProgress {
       : {},
     consecutivePasses: prog.consecutive_passes,
     level: prog.level,
+    streak: prog.streak_count ?? 0,
+    last_active_date: prog.last_active_date ?? null,
   };
 }
 
@@ -123,11 +129,22 @@ export function useUserProgress() {
     await refresh();
   }, [user, refresh]);
 
+  const callStreak = useCallback(async () => {
+    if (!user) return;
+    const { error } = await (supabase.rpc as any)("update_daily_streak");
+    if (error) {
+      console.error("update_daily_streak failed", error);
+      return;
+    }
+    await refresh();
+  }, [user, refresh]);
+
   return {
     progress,
     loaded,
     submitQuiz,
     setName,
     resetProgress,
+    callStreak,
   };
 }
