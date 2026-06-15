@@ -129,11 +129,22 @@ export function useUserProgress() {
     await refresh();
   }, [user, refresh]);
 
+  const callStreak = useCallback(async () => {
+    if (!user) return;
+    const { error } = await supabase.rpc("update_daily_streak");
+    if (error) {
+      console.error("update_daily_streak failed", error);
+      return;
+    }
+    await refresh();
+  }, [user, refresh]);
+
   return {
     progress,
     loaded,
     submitQuiz,
     setName,
     resetProgress,
+    callStreak,
   };
 }
