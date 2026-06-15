@@ -25,7 +25,7 @@ export default function Index() {
         <div className="bg-card rounded-2xl p-5 shadow-sm border border-border">
           <p className="text-muted-foreground text-sm">Welcome back,</p>
           <h2 className="text-xl font-bold text-foreground">{progress.name} 👋</h2>
-          <div className="mt-4 flex items-center gap-4">
+          <div className="mt-4 flex items-center gap-2 flex-wrap">
             <div className="flex items-center gap-2 bg-muted rounded-full px-3 py-1.5">
               <Star className="w-4 h-4 text-eco-sun" />
               <span className="text-sm font-semibold text-foreground">Level {progress.level}</span>
@@ -33,6 +33,12 @@ export default function Index() {
             <div className="flex items-center gap-2 bg-muted rounded-full px-3 py-1.5">
               <Flame className="w-4 h-4 text-destructive" />
               <span className="text-sm font-semibold text-foreground">{progress.totalPoints} pts</span>
+            </div>
+            <div className="bg-orange-500/10 rounded-full px-3 py-1.5 flex items-center gap-2">
+              <Flame className="w-4 h-4 text-orange-500" />
+              <span className="text-sm font-semibold text-foreground">
+                {progress.streak > 0 ? `${progress.streak} day streak` : "Start your streak today!"}
+              </span>
             </div>
           </div>
           <div className="mt-3">
