@@ -1,13 +1,32 @@
 import { useState } from "react";
 import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Mail, Lock, User, ArrowLeft, MailCheck } from "lucide-react";
+import { Mail, Lock, User, ArrowLeft, MailCheck, Eye, EyeOff, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import logo from "@/assets/ecolara-logo.jpg.asset.json";
+import logo from "@/assets/ecolara-logo.png.asset.json";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const slideUpStyle = `
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.animate-slide-up { animation: slideUp 0.4s ease-out forwards; }
+`;
+
+function GoogleIcon() {
+  return (
+    <svg className="w-4 h-4" viewBox="0 0 48 48">
+      <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.4 29.3 35.5 24 35.5c-6.4 0-11.5-5.1-11.5-11.5S17.6 12.5 24 12.5c2.9 0 5.6 1.1 7.7 2.9l5.7-5.7C33.9 6.5 29.2 4.5 24 4.5 13.2 4.5 4.5 13.2 4.5 24S13.2 43.5 24 43.5 43.5 34.8 43.5 24c0-1.2-.1-2.3-.3-3.5z"/>
+      <path fill="#FF3D00" d="M6.3 14.1l6.6 4.8C14.6 15.1 19 12.5 24 12.5c2.9 0 5.6 1.1 7.7 2.9l5.7-5.7C33.9 6.5 29.2 4.5 24 4.5 16.3 4.5 9.7 8.9 6.3 14.1z"/>
+      <path fill="#4CAF50" d="M24 43.5c5.1 0 9.7-1.9 13.2-5.1l-6.1-5c-2 1.4-4.5 2.2-7.1 2.2-5.3 0-9.7-3.1-11.3-7.5l-6.5 5C9.6 39 16.2 43.5 24 43.5z"/>
+      <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4-4.1 5.4l6.1 5c-.4.4 6.7-4.9 6.7-14.4 0-1.2-.1-2.3-.4-3.5z"/>
+    </svg>
+  );
+}
 
 export default function Auth() {
   const [searchParams] = useSearchParams();
@@ -15,6 +34,7 @@ export default function Auth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string; name?: string }>({});
   const [loading, setLoading] = useState(false);
   const [resending, setResending] = useState(false);
@@ -72,28 +92,37 @@ export default function Auth() {
     }
   };
 
+  const handleGoogle = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: `${window.location.origin}/home` },
+    });
+    if (error) toast({ title: "Google sign-in failed", description: error.message, variant: "destructive" });
+  };
+
   if (pendingEmail) {
     return (
-      <div className="min-h-screen bg-background flex flex-col items-center justify-center px-4 py-8">
-        <div className="w-full max-w-sm space-y-6">
-          <div className="bg-card rounded-2xl p-6 border border-border shadow-sm text-center">
-            <MailCheck className="w-12 h-12 text-primary mx-auto mb-3" />
-            <h2 className="text-lg font-semibold text-foreground mb-2">Verify your email</h2>
-            <p className="text-sm text-muted-foreground mb-4">
-              We sent a verification link to <span className="font-medium text-foreground">{pendingEmail}</span>.
+      <div className="min-h-screen flex flex-col items-center justify-center px-4 py-8" style={{ backgroundColor: "#0D2818" }}>
+        <style>{slideUpStyle}</style>
+        <div className="w-full max-w-sm">
+          <div className="bg-[#1a3a28] rounded-3xl p-6 border border-green-800/50 text-center animate-slide-up">
+            <MailCheck className="w-12 h-12 text-green-400 mx-auto mb-3" />
+            <h2 className="text-xl font-bold text-white mb-2">Check your inbox</h2>
+            <p className="text-sm text-green-300 mb-5">
+              We sent a verification link to <span className="font-medium text-white">{pendingEmail}</span>.
               Click the link to activate your account, then log in.
             </p>
             <Button
               onClick={handleResend}
               disabled={resending}
               variant="outline"
-              className="w-full h-11 rounded-xl"
+              className="w-full h-11 rounded-2xl border border-green-600 text-green-300 bg-transparent hover:bg-green-900/40 hover:text-green-200"
             >
-              {resending ? "Sending..." : "Resend verification email"}
+              {resending ? "Sending..." : "Resend email"}
             </Button>
             <button
               onClick={() => { setPendingEmail(null); setIsLogin(true); }}
-              className="text-sm text-primary font-medium mt-4 block w-full"
+              className="text-sm text-green-400 font-medium mt-4 block w-full"
             >
               Back to login
             </button>
@@ -104,99 +133,138 @@ export default function Auth() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center px-4 py-8">
-      <div className="w-full max-w-sm space-y-6">
-        <Link to="/" className="inline-flex items-center gap-1 text-sm text-muted-foreground">
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: "#0D2818" }}>
+      <style>{slideUpStyle}</style>
+
+      <div className="px-6 pt-10 pb-6">
+        <Link to="/" className="inline-flex items-center gap-1 text-sm text-green-400">
           <ArrowLeft className="w-4 h-4" /> Back
         </Link>
-
-        <div className="text-center">
-          <img src={logo.url} alt="EcoLara" className="w-24 h-24 mx-auto object-contain" />
-          <p className="text-xs text-muted-foreground mt-1">Gamified Climate Action Platform</p>
+        <div className="text-center mt-2">
+          <img src={logo.url} alt="EcoLara" className="w-16 h-16 mx-auto object-contain" />
+          <h1 className="text-2xl font-bold text-white mt-3">
+            {isLogin ? "Welcome Back" : "Join the Mission"}
+          </h1>
+          <p className="text-sm text-green-300 mt-1">
+            {isLogin ? "Continue your climate journey" : "Start your climate education journey"}
+          </p>
         </div>
+      </div>
 
-        <div className="bg-card rounded-2xl p-6 border border-border shadow-sm">
-          <h2 className="text-lg font-semibold text-foreground mb-4 text-center">
-            {isLogin ? "Welcome Back" : "Create Account"}
-          </h2>
-
-          <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-            {!isLogin && (
-              <div>
-                <div className="relative">
-                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                  <Input
-                    placeholder="Display name"
-                    value={displayName}
-                    onChange={e => setDisplayName(e.target.value)}
-                    className="pl-10 rounded-xl"
-                    maxLength={50}
-                  />
-                </div>
-                {errors.name && <p className="text-xs text-destructive mt-1">{errors.name}</p>}
-              </div>
-            )}
+      <div className="mx-4 bg-[#1a3a28] rounded-3xl p-6 border border-green-800/50 animate-slide-up">
+        <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+          {!isLogin && (
             <div>
-              <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <Input
-                  type="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  className="pl-10 rounded-xl"
+              <div className="flex items-center border-b border-green-700 focus-within:border-green-400 transition-colors">
+                <User className="w-4 h-4 text-green-500" />
+                <input
+                  type="text"
+                  placeholder="Your name"
+                  value={displayName}
+                  onChange={e => setDisplayName(e.target.value)}
+                  maxLength={50}
+                  className="bg-transparent text-white placeholder:text-green-700 text-sm py-3 pl-3 w-full outline-none"
                 />
               </div>
-              {errors.email && <p className="text-xs text-destructive mt-1">{errors.email}</p>}
+              {errors.name && <p className="text-xs text-red-400 mt-1">{errors.name}</p>}
             </div>
-            <div>
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <Input
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                  className="pl-10 rounded-xl"
-                />
-              </div>
-              {errors.password && <p className="text-xs text-destructive mt-1">{errors.password}</p>}
+          )}
+
+          <div>
+            <div className="flex items-center border-b border-green-700 focus-within:border-green-400 transition-colors">
+              <Mail className="w-4 h-4 text-green-500" />
+              <input
+                type="email"
+                placeholder="Email address"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                className="bg-transparent text-white placeholder:text-green-700 text-sm py-3 pl-3 w-full outline-none"
+              />
             </div>
-
-            <Button
-              type="submit"
-              disabled={loading}
-              className="w-full h-12 rounded-xl text-base font-semibold bg-primary text-primary-foreground"
-            >
-              {loading ? "Please wait..." : isLogin ? "Log In" : "Sign Up"}
-            </Button>
-          </form>
-
-          <div className="mt-4 text-center space-y-2">
-            <button
-              onClick={() => { setIsLogin(!isLogin); setErrors({}); }}
-              className="text-sm text-primary font-medium block w-full"
-            >
-              {isLogin ? "Don't have an account? Sign up" : "Already have an account? Log in"}
-            </button>
-            {isLogin && (
-              <div className="flex flex-col gap-1">
-                <Link to="/forgot-password" className="text-xs text-muted-foreground hover:text-foreground">
-                  Forgot password?
-                </Link>
-                {EMAIL_RE.test(email.trim()) && (
-                  <button
-                    type="button"
-                    onClick={() => { setPendingEmail(email.trim()); handleResend(); }}
-                    className="text-xs text-muted-foreground hover:text-foreground"
-                  >
-                    Didn't get a verification email? Resend
-                  </button>
-                )}
-              </div>
-            )}
+            {errors.email && <p className="text-xs text-red-400 mt-1">{errors.email}</p>}
           </div>
+
+          <div>
+            <div className="flex items-center border-b border-green-700 focus-within:border-green-400 transition-colors">
+              <Lock className="w-4 h-4 text-green-500" />
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder={isLogin ? "Password" : "Create a password"}
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                className="bg-transparent text-white placeholder:text-green-700 text-sm py-3 pl-3 w-full outline-none"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(s => !s)}
+                className="text-green-500 hover:text-green-300 p-1"
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+              </button>
+            </div>
+            {errors.password && <p className="text-xs text-red-400 mt-1">{errors.password}</p>}
+          </div>
+
+          {isLogin && (
+            <div className="flex justify-between items-center mt-2">
+              <label className="flex items-center gap-2 text-xs text-green-300 cursor-pointer">
+                <input type="checkbox" className="accent-green-500 w-3.5 h-3.5" />
+                Remember me
+              </label>
+              <Link to="/forgot-password" className="text-xs text-green-400 hover:text-green-300">
+                Forgot password?
+              </Link>
+            </div>
+          )}
+
+          <Button
+            type="submit"
+            disabled={loading}
+            className="w-full h-12 rounded-2xl bg-green-500 hover:bg-green-400 text-white font-semibold mt-6"
+          >
+            {loading ? (
+              <span className="flex items-center gap-2">
+                <Loader2 className="w-4 h-4 animate-spin" />
+                {isLogin ? "Logging in..." : "Creating account..."}
+              </span>
+            ) : isLogin ? "Log In" : "Create Account"}
+          </Button>
+        </form>
+
+        <div className="flex items-center gap-3 my-5">
+          <div className="flex-1 border-t border-green-800" />
+          <span className="text-green-600 text-xs">or</span>
+          <div className="flex-1 border-t border-green-800" />
         </div>
+
+        <button
+          type="button"
+          onClick={handleGoogle}
+          className="w-full h-11 rounded-2xl border border-green-700 bg-transparent flex items-center justify-center gap-3 hover:bg-green-900/40 transition-colors"
+        >
+          <GoogleIcon />
+          <span className="text-white text-sm font-medium">Continue with Google</span>
+        </button>
+
+        {isLogin && EMAIL_RE.test(email.trim()) && (
+          <button
+            type="button"
+            onClick={() => { setPendingEmail(email.trim()); handleResend(); }}
+            className="text-xs text-green-500 hover:text-green-300 mt-3 block w-full text-center"
+          >
+            Didn't get a verification email? Resend
+          </button>
+        )}
+      </div>
+
+      <div className="text-center mt-6 pb-10">
+        <button
+          onClick={() => { setIsLogin(!isLogin); setErrors({}); }}
+          className="text-sm text-green-400 hover:text-green-300"
+        >
+          {isLogin ? "Don't have an account? Sign up" : "Already have an account? Log in"}
+        </button>
       </div>
     </div>
   );
