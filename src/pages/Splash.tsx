@@ -2,7 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
-import logo from "@/assets/ecolara-logo.jpg.asset.json";
+import { Flame, Star, Trophy } from "lucide-react";
+import logo from "@/assets/ecolara-logo.png.asset.json";
 
 export default function Splash() {
   const navigate = useNavigate();
@@ -19,38 +20,54 @@ export default function Splash() {
   }, [loading, user, navigate]);
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-between px-6 py-12">
-      <div className="flex-1 flex flex-col items-center justify-center w-full">
+    <div
+      className="min-h-screen flex flex-col items-center justify-between px-6"
+      style={{ backgroundColor: "#0D2818" }}
+    >
+      <div className="flex-1 flex flex-col items-center justify-center w-full pt-12">
         <img
           src={logo.url}
           alt="EcoLara logo"
-          className="w-56 h-56 object-contain animate-float"
+          className="w-36 h-36 object-contain animate-float"
         />
-        <p className="mt-4 text-base text-muted-foreground font-medium">
+        <h1 className="mt-4 text-2xl font-bold text-white">EcoLara</h1>
+        <p className="mt-1 text-sm text-green-300">
           Gamified Climate Action Platform
         </p>
+
+        <div className="flex flex-row gap-3 mt-6">
+          <span className="flex items-center gap-1 bg-green-900/50 rounded-full px-3 py-1 text-xs text-green-300 border border-green-700/50">
+            <Flame className="w-3 h-3" /> Eco Streak
+          </span>
+          <span className="flex items-center gap-1 bg-green-900/50 rounded-full px-3 py-1 text-xs text-green-300 border border-green-700/50">
+            <Star className="w-3 h-3" /> EcoPoints
+          </span>
+          <span className="flex items-center gap-1 bg-green-900/50 rounded-full px-3 py-1 text-xs text-green-300 border border-green-700/50">
+            <Trophy className="w-3 h-3" /> Badges
+          </span>
+        </div>
       </div>
 
       <div
-        className={`w-full max-w-sm space-y-3 transition-opacity duration-500 ${
+        className={`w-full max-w-sm mx-auto space-y-3 pb-12 transition-opacity duration-500 ${
           showActions ? "opacity-100" : "opacity-0"
         }`}
       >
         <Button
           onClick={() => navigate("/auth?mode=signup")}
-          className="w-full h-12 rounded-xl text-base font-semibold bg-primary text-primary-foreground"
+          className="w-full h-12 rounded-2xl bg-green-500 hover:bg-green-400 text-white font-semibold text-base"
         >
-          Sign Up
+          Get Started
         </Button>
         <Button
           onClick={() => navigate("/auth?mode=login")}
           variant="outline"
-          className="w-full h-12 rounded-xl text-base font-semibold"
+          className="w-full h-12 rounded-2xl border border-green-600 text-green-300 font-medium text-base bg-transparent hover:bg-green-900/40 hover:text-green-200"
         >
           Log In
         </Button>
-        <p className="text-center text-xs text-muted-foreground pt-2">
-          Learn. Act. Protect the planet.
+        <p className="text-center text-xs text-green-400 pt-2">
+          Learn. Earn. Protect the Planet.
         </p>
       </div>
     </div>
