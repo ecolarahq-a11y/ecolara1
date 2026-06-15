@@ -131,7 +131,7 @@ export function useUserProgress() {
 
   const callStreak = useCallback(async () => {
     if (!user) return;
-    const { error } = await supabase.rpc("update_daily_streak");
+    const { error } = await (supabase.rpc as any)("update_daily_streak");
     if (error) {
       console.error("update_daily_streak failed", error);
       return;
