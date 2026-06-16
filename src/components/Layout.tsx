@@ -1,10 +1,12 @@
 import { ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Home, BookOpen, Trophy, User } from "lucide-react";
+import { Home, BookOpen, Trophy, User, CheckSquare } from "lucide-react";
 
 const navItems = [
   { path: "/home", icon: Home, label: "Home" },
   { path: "/modules", icon: BookOpen, label: "Learn" },
+  { path: "/missions", icon: CheckSquare, label: "Missions" },
+  { path: "/leaderboard", icon: Trophy, label: "Rankings" },
   { path: "/badges", icon: Trophy, label: "Badges" },
   { path: "/profile", icon: User, label: "Profile" },
 ];
