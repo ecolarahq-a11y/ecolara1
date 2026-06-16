@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { modules } from "@/data/modules";
 import { useUserProgress } from "@/hooks/useUserProgress";
+import { supabase } from "@/integrations/supabase/client";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Play } from "lucide-react";
@@ -10,6 +12,10 @@ export default function ModuleDetail() {
   const navigate = useNavigate();
   const { progress } = useUserProgress();
   const mod = modules.find(m => m.id === Number(id));
+
+  useEffect(() => {
+    (supabase.rpc as any)("complete_mission", { p_mission_number: 3 }).catch(() => {});
+  }, [id]);
 
   if (!mod) return <Layout><div className="p-8 text-center text-muted-foreground">Module not found</div></Layout>;
 

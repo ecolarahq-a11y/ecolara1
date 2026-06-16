@@ -15,6 +15,8 @@ import Splash from "./pages/Splash";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
+import Leaderboard from "./pages/Leaderboard";
+import DailyMissions from "./pages/DailyMissions";
 
 const queryClient = new QueryClient();
 
@@ -57,6 +59,8 @@ function AppRoutes() {
       <Route path="/quiz/:id" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
       <Route path="/badges" element={<ProtectedRoute><Badges /></ProtectedRoute>} />
       <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+      <Route path="/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
+      <Route path="/missions" element={<ProtectedRoute><DailyMissions /></ProtectedRoute>} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

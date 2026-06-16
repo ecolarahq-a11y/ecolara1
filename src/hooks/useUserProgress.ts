@@ -101,8 +101,13 @@ export function useUserProgress() {
         console.error("submit_quiz_result failed", error);
         return null;
       }
+      const result = data as unknown as SubmitQuizResponse;
+      await (supabase.rpc as any)("complete_mission", { p_mission_number: 1 });
+      if (result?.percentage > 70) {
+        await (supabase.rpc as any)("complete_mission", { p_mission_number: 2 });
+      }
       await refresh();
-      return data as unknown as SubmitQuizResponse;
+      return result;
     },
     [user, refresh]
   );
