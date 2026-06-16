@@ -15,6 +15,8 @@ import Splash from "./pages/Splash";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
+import Leaderboard from "./pages/Leaderboard";
+import DailyMissions from "./pages/DailyMissions";
 
 const queryClient = new QueryClient();
 
