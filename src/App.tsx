@@ -62,6 +62,7 @@ function AppRoutes() {
       <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
       <Route path="/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
       <Route path="/missions" element={<ProtectedRoute><DailyMissions /></ProtectedRoute>} />
+      <Route path="/mentor" element={<ProtectedRoute><AIMentor /></ProtectedRoute>} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
