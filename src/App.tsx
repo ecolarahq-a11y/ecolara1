@@ -17,6 +17,7 @@ import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
 import Leaderboard from "./pages/Leaderboard";
 import DailyMissions from "./pages/DailyMissions";
+import AIMentor from "./pages/AIMentor";
 
 const queryClient = new QueryClient();
 
