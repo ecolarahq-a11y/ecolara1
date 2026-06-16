@@ -92,6 +92,7 @@ export type Database = {
           earned_badges: string[]
           id: string
           last_active_date: string | null
+          last_mentor_reward_date: string | null
           level: number
           quiz_scores: Json
           streak_count: number
@@ -107,6 +108,7 @@ export type Database = {
           earned_badges?: string[]
           id?: string
           last_active_date?: string | null
+          last_mentor_reward_date?: string | null
           level?: number
           quiz_scores?: Json
           streak_count?: number
@@ -122,6 +124,7 @@ export type Database = {
           earned_badges?: string[]
           id?: string
           last_active_date?: string | null
+          last_mentor_reward_date?: string | null
           level?: number
           quiz_scores?: Json
           streak_count?: number
@@ -136,6 +139,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      award_mentor_points: { Args: never; Returns: Json }
       complete_mission: { Args: { p_mission_number: number }; Returns: Json }
       get_or_create_daily_missions: {
         Args: never
