@@ -14,6 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
+      daily_missions: {
+        Row: {
+          created_at: string
+          id: string
+          mission_1_done: boolean
+          mission_1_rewarded: boolean
+          mission_2_done: boolean
+          mission_2_rewarded: boolean
+          mission_3_done: boolean
+          mission_3_rewarded: boolean
+          mission_date: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          mission_1_done?: boolean
+          mission_1_rewarded?: boolean
+          mission_2_done?: boolean
+          mission_2_rewarded?: boolean
+          mission_3_done?: boolean
+          mission_3_rewarded?: boolean
+          mission_date?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          mission_1_done?: boolean
+          mission_1_rewarded?: boolean
+          mission_2_done?: boolean
+          mission_2_rewarded?: boolean
+          mission_3_done?: boolean
+          mission_3_rewarded?: boolean
+          mission_date?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -94,6 +136,29 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      complete_mission: { Args: { p_mission_number: number }; Returns: Json }
+      get_or_create_daily_missions: {
+        Args: never
+        Returns: {
+          created_at: string
+          id: string
+          mission_1_done: boolean
+          mission_1_rewarded: boolean
+          mission_2_done: boolean
+          mission_2_rewarded: boolean
+          mission_3_done: boolean
+          mission_3_rewarded: boolean
+          mission_date: string
+          updated_at: string
+          user_id: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "daily_missions"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
       reset_user_progress: { Args: never; Returns: undefined }
       submit_quiz_result: {
         Args: { p_correct: number; p_module_id: number; p_total: number }
