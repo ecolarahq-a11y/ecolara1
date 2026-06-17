@@ -56,6 +56,36 @@ export type Database = {
         }
         Relationships: []
       }
+      mentor_usage: {
+        Row: {
+          day_count: number
+          day_date: string
+          id: string
+          minute_count: number
+          minute_window_start: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          day_count?: number
+          day_date?: string
+          id?: string
+          minute_count?: number
+          minute_window_start?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          day_count?: number
+          day_date?: string
+          id?: string
+          minute_count?: number
+          minute_window_start?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -140,6 +170,7 @@ export type Database = {
     }
     Functions: {
       award_mentor_points: { Args: never; Returns: Json }
+      check_mentor_rate_limit: { Args: never; Returns: Json }
       complete_mission: { Args: { p_mission_number: number }; Returns: Json }
       get_or_create_daily_missions: {
         Args: never
