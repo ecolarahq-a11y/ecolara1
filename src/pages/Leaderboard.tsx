@@ -27,24 +27,17 @@ export default function Leaderboard() {
 
   useEffect(() => {
     (async () => {
-      const { data, error } = await supabase
-        .from("user_progress")
-        .select("total_points, level, user_id, profiles!inner(display_name)")
-        .order("total_points", { ascending: false })
-        .limit(20);
+      const { data, error } = await (supabase.rpc as any)("get_leaderboard");
       if (error || !data) {
         setError(true);
         return;
       }
-      const list: Entry[] = (data as unknown as Row[]).map((r) => {
-        const p = Array.isArray(r.profiles) ? r.profiles[0] : r.profiles;
-        return {
-          name: p?.display_name || "Eco Learner",
-          points: r.total_points,
-          level: r.level,
-          user_id: r.user_id,
-        };
-      });
+      const list: Entry[] = (data as any[]).map((r) => ({
+        name: r.display_name || "Eco Learner",
+        points: r.total_points,
+        level: r.level,
+        user_id: r.user_id,
+      }));
       setEntries(list);
       if (user) {
         const idx = list.findIndex((e) => e.user_id === user.id);
