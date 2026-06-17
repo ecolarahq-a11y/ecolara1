@@ -78,7 +78,20 @@ Deno.serve(async (req) => {
       );
     }
 
-    const trimmed = messages.slice(-10);
+    const trimmed = messages
+      .slice(-10)
+      .filter((m: any) => m && typeof m.content === "string")
+      .map((m: any) => ({
+        role: m.role === "assistant" ? "assistant" : "user",
+        content: String(m.content).slice(0, 2000),
+      }));
+
+    if (trimmed.length === 0) {
+      return new Response(JSON.stringify({ error: "messages array required" }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
 
     const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
