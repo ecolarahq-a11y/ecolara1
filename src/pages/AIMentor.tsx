@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
-import { Bot, Send, Leaf } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { toast } from "sonner";
+import { Bot, Send, Leaf, Download, Trash2 } from "lucide-react";
 
 interface ChatMsg {
   role: "user" | "assistant";
   content: string;
+  ts?: number;
 }
 
 const SUGGESTIONS = [
@@ -16,13 +19,44 @@ const SUGGESTIONS = [
 ];
 
 const ERROR_MSG = "I'm having trouble connecting right now. Try again in a moment.";
+const STORAGE_PREFIX = "ecolara_mentor_history_";
+const HISTORY_LIMIT = 10;
 
 export default function AIMentor() {
+  const { user } = useAuth();
+  const storageKey = user ? `${STORAGE_PREFIX}${user.id}` : null;
+
   const [messages, setMessages] = useState<ChatMsg[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const awardedRef = useRef(false);
+  const loadedRef = useRef(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Load history once user is known
+  useEffect(() => {
+    if (!storageKey || loadedRef.current) return;
+    try {
+      const raw = localStorage.getItem(storageKey);
+      if (raw) {
+        const parsed = JSON.parse(raw) as ChatMsg[];
+        if (Array.isArray(parsed)) setMessages(parsed.slice(-HISTORY_LIMIT));
+      }
+    } catch {
+      // ignore
+    }
+    loadedRef.current = true;
+  }, [storageKey]);
+
+  // Persist history (capped)
+  useEffect(() => {
+    if (!storageKey || !loadedRef.current) return;
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(messages.slice(-HISTORY_LIMIT)));
+    } catch {
+      // ignore quota
+    }
+  }, [messages, storageKey]);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
@@ -32,28 +66,49 @@ export default function AIMentor() {
     const trimmed = text.trim().slice(0, 500);
     if (!trimmed || loading) return;
 
-    const userMsg: ChatMsg = { role: "user", content: trimmed };
-    const history = [...messages, userMsg].slice(-10);
+    const userMsg: ChatMsg = { role: "user", content: trimmed, ts: Date.now() };
+    const history = [...messages, userMsg].slice(-HISTORY_LIMIT);
     setMessages((m) => [...m, userMsg]);
     setInput("");
     setLoading(true);
 
     if (!awardedRef.current) {
       awardedRef.current = true;
-      (supabase.rpc as any)("award_mentor_points").catch(() => {});
+      try {
+        const { data } = await (supabase.rpc as any)("award_mentor_points");
+        if (data?.awarded) {
+          toast.success("🌱 +5 EcoPoints earned!", {
+            description: "Daily AI Mentor reward",
+          });
+        }
+      } catch {
+        // silent
+      }
     }
 
     try {
       const { data, error } = await supabase.functions.invoke("ai-mentor", {
-        body: { messages: history },
+        body: { messages: history.map(({ role, content }) => ({ role, content })) },
       });
-      if (error || !data?.reply) {
-        setMessages((m) => [...m, { role: "assistant", content: data?.error || ERROR_MSG }]);
+
+      // functions.invoke surfaces non-2xx as `error`, but `data` may still contain JSON payload
+      const payload: any = data ?? (error as any)?.context?.body ?? null;
+      const reply = payload?.reply;
+      const errMsg = payload?.error;
+
+      if (reply) {
+        setMessages((m) => [...m, { role: "assistant", content: reply, ts: Date.now() }]);
+        if (payload?.rate_limited) toast.warning(errMsg);
+      } else if (errMsg) {
+        toast.error(errMsg);
+        setMessages((m) => [...m, { role: "assistant", content: errMsg, ts: Date.now() }]);
       } else {
-        setMessages((m) => [...m, { role: "assistant", content: data.reply }]);
+        toast.error(ERROR_MSG);
+        setMessages((m) => [...m, { role: "assistant", content: ERROR_MSG, ts: Date.now() }]);
       }
     } catch {
-      setMessages((m) => [...m, { role: "assistant", content: ERROR_MSG }]);
+      toast.error(ERROR_MSG);
+      setMessages((m) => [...m, { role: "assistant", content: ERROR_MSG, ts: Date.now() }]);
     } finally {
       setLoading(false);
     }
@@ -64,6 +119,35 @@ export default function AIMentor() {
     send(input);
   };
 
+  const exportConversation = () => {
+    if (messages.length === 0) {
+      toast.info("No conversation to export yet.");
+      return;
+    }
+    const lines = messages.map((m) => {
+      const who = m.role === "user" ? "You" : "EcoLara Mentor";
+      const when = m.ts ? new Date(m.ts).toLocaleString() : "";
+      return `[${when}] ${who}:\n${m.content}\n`;
+    });
+    const header = `EcoLara AI Climate Mentor — Conversation Export\nExported: ${new Date().toLocaleString()}\n\n`;
+    const blob = new Blob([header + lines.join("\n")], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `ecolara-mentor-${new Date().toISOString().slice(0, 10)}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    toast.success("Conversation exported");
+  };
+
+  const clearHistory = () => {
+    setMessages([]);
+    if (storageKey) localStorage.removeItem(storageKey);
+    toast.success("Chat history cleared");
+  };
+
   return (
     <Layout>
       <div className="container max-w-lg mx-auto flex flex-col h-[calc(100vh-9rem)]">
@@ -72,14 +156,30 @@ export default function AIMentor() {
             <div className="w-9 h-9 rounded-full eco-gradient flex items-center justify-center">
               <Bot className="w-5 h-5 text-primary-foreground" />
             </div>
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <h1 className="text-lg font-bold leading-tight">AI Climate Mentor</h1>
-              <p className="text-xs text-muted-foreground">Ask anything about climate change</p>
+              <p className="text-xs text-muted-foreground truncate">Ask anything about climate change</p>
             </div>
             <span className="flex items-center gap-1.5 text-xs font-medium text-green-600 bg-green-500/10 px-2 py-1 rounded-full">
               <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
               Online
             </span>
+          </div>
+          <div className="flex gap-2 mt-2">
+            <button
+              onClick={exportConversation}
+              className="text-xs flex items-center gap-1 px-2.5 py-1 rounded-full bg-card border border-border hover:border-primary transition-colors"
+            >
+              <Download className="w-3 h-3" /> Export
+            </button>
+            {messages.length > 0 && (
+              <button
+                onClick={clearHistory}
+                className="text-xs flex items-center gap-1 px-2.5 py-1 rounded-full bg-card border border-border hover:border-destructive hover:text-destructive transition-colors"
+              >
+                <Trash2 className="w-3 h-3" /> Clear
+              </button>
+            )}
           </div>
         </div>
 
