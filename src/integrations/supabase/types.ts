@@ -172,6 +172,15 @@ export type Database = {
       award_mentor_points: { Args: never; Returns: Json }
       check_mentor_rate_limit: { Args: never; Returns: Json }
       complete_mission: { Args: { p_mission_number: number }; Returns: Json }
+      get_leaderboard: {
+        Args: never
+        Returns: {
+          display_name: string
+          level: number
+          total_points: number
+          user_id: string
+        }[]
+      }
       get_or_create_daily_missions: {
         Args: never
         Returns: {
