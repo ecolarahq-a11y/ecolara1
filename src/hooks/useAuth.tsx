@@ -6,7 +6,7 @@ interface AuthContextType {
   user: User | null;
   session: Session | null;
   loading: boolean;
-  signUp: (email: string, password: string, displayName: string) => Promise<{ error: Error | null }>;
+  signUp: (email: string, password: string, displayName: string) => Promise<{ error: Error | null; alreadyRegistered?: boolean; needsConfirmation?: boolean }>;
   signIn: (email: string, password: string) => Promise<{ error: Error | null }>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<{ error: Error | null }>;
@@ -38,7 +38,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const signUp = async (email: string, password: string, displayName: string) => {
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -46,7 +46,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         emailRedirectTo: window.location.origin,
       },
     });
-    return { error: error as Error | null };
+    // Supabase returns user with empty identities array when email is already registered
+    const alreadyRegistered = !error && !!data?.user && (data.user.identities?.length ?? 0) === 0;
+    const needsConfirmation = !error && !!data?.user && !data.session && !alreadyRegistered;
+    return { error: error as Error | null, alreadyRegistered, needsConfirmation };
   };
 
   const signIn = async (email: string, password: string) => {
