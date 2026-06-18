@@ -204,7 +204,7 @@ export default function Auth() {
                   <Square size={14} color="#166534" />
                   <Text style={styles.rememberText}>Remember me</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => router.push('/forgot-password')}>
+                <TouchableOpacity onPress={() => router.push('/forgot-password' as any)}>
                   <Text style={styles.forgotText}>Forgot password?</Text>
                 </TouchableOpacity>
               </View>
