@@ -66,21 +66,39 @@ export default function Auth() {
     if (isLogin) {
       const { error } = await signIn(email.trim(), password);
       if (error) {
+        logEmail({ email: email.trim(), action: "login", status: "error", message: error.message });
+        refreshLog();
         if (error.message.toLowerCase().includes("email not confirmed")) {
           setPendingEmail(email.trim());
+          setPendingState("sent");
           toast({ title: "Verify your email", description: "Please confirm your email to log in.", variant: "destructive" });
         } else {
           toast({ title: "Login failed", description: error.message, variant: "destructive" });
         }
       } else {
+        logEmail({ email: email.trim(), action: "login", status: "ok" });
         navigate("/home");
       }
     } else {
-      const { error } = await signUp(email.trim(), password, displayName.trim());
+      const { error, alreadyRegistered, needsConfirmation } = await signUp(email.trim(), password, displayName.trim());
       if (error) {
+        logEmail({ email: email.trim(), action: "signup", status: "error", message: error.message });
+        refreshLog();
         toast({ title: "Signup failed", description: error.message, variant: "destructive" });
+      } else if (alreadyRegistered) {
+        logEmail({ email: email.trim(), action: "signup", status: "already_registered", message: "Email already in use — switched to login" });
+        refreshLog();
+        toast({
+          title: "Email already registered",
+          description: "This email is already in use. Switched to login — enter your password.",
+        });
+        setIsLogin(true);
+        setPassword("");
       } else {
+        logEmail({ email: email.trim(), action: "signup", status: needsConfirmation ? "needs_confirmation" : "ok" });
+        refreshLog();
         setPendingEmail(email.trim());
+        setPendingState("sent");
       }
     }
     setLoading(false);
@@ -89,11 +107,19 @@ export default function Auth() {
   const handleResend = async () => {
     if (!pendingEmail) return;
     setResending(true);
+    setLastResendError(null);
     const { error } = await resendVerification(pendingEmail);
     setResending(false);
     if (error) {
+      setLastResendError(error.message);
+      setPendingState("resend_failed");
+      logEmail({ email: pendingEmail, action: "resend", status: "error", message: error.message });
+      refreshLog();
       toast({ title: "Could not resend", description: error.message, variant: "destructive" });
     } else {
+      setPendingState("sent");
+      logEmail({ email: pendingEmail, action: "resend", status: "ok" });
+      refreshLog();
       toast({ title: "Verification email sent", description: `Check your inbox at ${pendingEmail}` });
     }
   };
