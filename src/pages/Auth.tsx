@@ -3,8 +3,9 @@ import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Mail, Lock, User, ArrowLeft, MailCheck, Eye, EyeOff, Loader2 } from "lucide-react";
+import { Mail, Lock, User, ArrowLeft, MailCheck, Eye, EyeOff, Loader2, Bug, Trash2, CheckCircle2, AlertTriangle, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { getEmailLog, logEmail, clearEmailLog, type EmailLogEntry } from "@/lib/email-log";
 import logo from "@/assets/ecolara-logo.png.asset.json";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -39,6 +40,11 @@ export default function Auth() {
   const [loading, setLoading] = useState(false);
   const [resending, setResending] = useState(false);
   const [pendingEmail, setPendingEmail] = useState<string | null>(null);
+  const [pendingState, setPendingState] = useState<"sent" | "already_registered" | "resend_failed">("sent");
+  const [lastResendError, setLastResendError] = useState<string | null>(null);
+  const [showDebug, setShowDebug] = useState(false);
+  const [emailLog, setEmailLog] = useState<EmailLogEntry[]>(() => getEmailLog());
+  const refreshLog = () => setEmailLog(getEmailLog());
   const { signIn, signUp, resendVerification } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
