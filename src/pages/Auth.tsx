@@ -338,3 +338,46 @@ export default function Auth() {
     </div>
   );
 }
+
+function DebugPanel({ log, onClear }: { log: EmailLogEntry[]; onClear: () => void }) {
+  const iconFor = (s: EmailLogEntry["status"]) => {
+    if (s === "ok") return <CheckCircle2 className="w-3 h-3 text-green-400" />;
+    if (s === "needs_confirmation") return <Clock className="w-3 h-3 text-amber-400" />;
+    if (s === "already_registered") return <AlertTriangle className="w-3 h-3 text-amber-400" />;
+    return <AlertTriangle className="w-3 h-3 text-red-400" />;
+  };
+  return (
+    <div className="mt-4 text-left bg-[#0D2818] border border-green-900 rounded-xl p-3">
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-xs font-semibold text-green-300 flex items-center gap-1">
+          <Bug className="w-3 h-3" /> Email delivery log
+        </span>
+        <button onClick={onClear} className="text-xs text-green-600 hover:text-red-400 flex items-center gap-1">
+          <Trash2 className="w-3 h-3" /> Clear
+        </button>
+      </div>
+      {log.length === 0 ? (
+        <p className="text-xs text-green-700">No attempts logged yet.</p>
+      ) : (
+        <ul className="space-y-1.5 max-h-48 overflow-auto">
+          {log.map((e, i) => (
+            <li key={i} className="text-xs text-green-300 flex items-start gap-2">
+              {iconFor(e.status)}
+              <div className="flex-1 min-w-0">
+                <div className="flex justify-between gap-2">
+                  <span className="font-medium text-white truncate">{e.action}</span>
+                  <span className="text-green-700 shrink-0">{new Date(e.ts).toLocaleTimeString()}</span>
+                </div>
+                <div className="text-green-500 truncate">{e.email} · {e.status}</div>
+                {e.message && <div className="text-red-400 break-words">{e.message}</div>}
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+      <p className="text-[10px] text-green-700 mt-2">
+        Tip: if resends consistently fail, set up a verified sender domain so emails reach your inbox reliably.
+      </p>
+    </div>
+  );
+}
