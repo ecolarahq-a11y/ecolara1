@@ -133,31 +133,68 @@ export default function Auth() {
   };
 
   if (pendingEmail) {
+    const statusBadge =
+      pendingState === "resend_failed" ? (
+        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-900/40 border border-red-700 text-red-300 text-xs mb-3">
+          <AlertTriangle className="w-3 h-3" /> Delivery failed — retry below
+        </div>
+      ) : (
+        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-green-900/40 border border-green-700 text-green-300 text-xs mb-3">
+          <CheckCircle2 className="w-3 h-3" /> Email queued for delivery
+        </div>
+      );
+
     return (
       <div className="min-h-screen flex flex-col items-center justify-center px-4 py-8" style={{ backgroundColor: "#0D2818" }}>
         <style>{slideUpStyle}</style>
         <div className="w-full max-w-sm">
           <div className="bg-[#1a3a28] rounded-3xl p-6 border border-green-800/50 text-center animate-slide-up">
             <MailCheck className="w-12 h-12 text-green-400 mx-auto mb-3" />
+            {statusBadge}
             <h2 className="text-xl font-bold text-white mb-2">Check your inbox</h2>
-            <p className="text-sm text-green-300 mb-5">
+            <p className="text-sm text-green-300 mb-2">
               We sent a verification link to <span className="font-medium text-white">{pendingEmail}</span>.
               Click the link to activate your account, then log in.
             </p>
+            <p className="text-xs text-green-500 mb-5">
+              Can't find it? Check spam/promotions, or resend below. Delivery may take 1–2 minutes.
+            </p>
+
+            {lastResendError && (
+              <div className="text-left text-xs bg-red-950/40 border border-red-800 rounded-xl p-3 mb-4 text-red-300">
+                <div className="font-semibold mb-1 flex items-center gap-1"><AlertTriangle className="w-3 h-3" /> Last resend error</div>
+                <div className="break-words">{lastResendError}</div>
+              </div>
+            )}
+
             <Button
               onClick={handleResend}
               disabled={resending}
               variant="outline"
               className="w-full h-11 rounded-2xl border border-green-600 text-green-300 bg-transparent hover:bg-green-900/40 hover:text-green-200"
             >
-              {resending ? "Sending..." : "Resend email"}
+              {resending ? (
+                <span className="flex items-center gap-2"><Loader2 className="w-4 h-4 animate-spin" /> Sending...</span>
+              ) : pendingState === "resend_failed" ? "Retry sending email" : "Resend email"}
             </Button>
+
             <button
-              onClick={() => { setPendingEmail(null); setIsLogin(true); }}
+              onClick={() => { setPendingEmail(null); setIsLogin(true); setLastResendError(null); }}
               className="text-sm text-green-400 font-medium mt-4 block w-full"
             >
               Back to login
             </button>
+
+            <button
+              onClick={() => setShowDebug(s => !s)}
+              className="text-xs text-green-600 hover:text-green-400 mt-3 inline-flex items-center gap-1"
+            >
+              <Bug className="w-3 h-3" /> {showDebug ? "Hide" : "Show"} troubleshooting panel
+            </button>
+
+            {showDebug && (
+              <DebugPanel log={emailLog} onClear={() => { clearEmailLog(); refreshLog(); }} />
+            )}
           </div>
         </div>
       </div>
