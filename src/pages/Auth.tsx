@@ -125,16 +125,32 @@ export default function Auth() {
   };
 
   const handleGoogle = async () => {
-    const { lovable } = await import("@/integrations/lovable");
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: `${window.location.origin}/home`,
-    });
-    if (result.error) {
-      toast({ title: "Google sign-in failed", description: result.error.message, variant: "destructive" });
+    let lovableMod;
+    try {
+      lovableMod = await import("@/integrations/lovable");
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e);
+      toast({
+        title: "Google sign-in unavailable",
+        description: `Could not load the authentication module. ${msg}. Please refresh and try again.`,
+        variant: "destructive",
+      });
       return;
     }
-    if (result.redirected) return;
-    navigate("/home");
+    try {
+      const result = await lovableMod.lovable.auth.signInWithOAuth("google", {
+        redirect_uri: `${window.location.origin}/home`,
+      });
+      if (result.error) {
+        toast({ title: "Google sign-in failed", description: result.error.message, variant: "destructive" });
+        return;
+      }
+      if (result.redirected) return;
+      navigate("/home");
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e);
+      toast({ title: "Google sign-in failed", description: msg, variant: "destructive" });
+    }
   };
 
 
