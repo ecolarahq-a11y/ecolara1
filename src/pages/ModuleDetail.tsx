@@ -14,7 +14,7 @@ export default function ModuleDetail() {
   const mod = modules.find(m => m.id === Number(id));
 
   useEffect(() => {
-    Promise.resolve((supabase.rpc as any)("complete_mission", { p_mission_number: 3 })).catch(() => {});
+    (supabase.rpc as any)("complete_mission", { p_mission_number: 3 }).catch(() => {});
   }, [id]);
 
   if (!mod) return <Layout><div className="p-8 text-center text-muted-foreground">Module not found</div></Layout>;

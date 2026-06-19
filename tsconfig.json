@@ -1,40 +1,24 @@
 {
-  "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": false,
+    "allowJs": true,
+    "noImplicitAny": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "skipLibCheck": true,
+    "strictNullChecks": false
   },
-  "include": [
-    "app/**/*.ts",
-    "app/**/*.tsx",
-    "src/hooks/**/*",
-    "src/lib/quiz-engine.ts",
-    "src/lib/email-log.ts",
-    "src/data/**/*",
-    "src/integrations/**/*",
-    "src/components/Toast.tsx",
-    ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "src/App.tsx",
-    "src/pages/**/*",
-    "src/main.tsx",
-    "src/index.css",
-    "src/App.css",
-    "src/test/**/*",
-    "src/vite-env.d.ts",
-    "src/components/ui/**/*",
-    "src/components/Layout.tsx",
-    "src/components/NavLink.tsx",
-    "src/hooks/use-mobile.tsx",
-    "src/hooks/use-toast.ts",
-    "src/assets/**/*",
-    "public/**/*",
-    "playwright.config.ts",
-    "playwright-fixture.ts"
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
   ]
 }
